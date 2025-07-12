@@ -9,13 +9,9 @@
 
 ## SYSTEM VERIFICATION
 1. Read SYSTEM_CONFIG.md completely
-2. Verify DATABASE_URL in .env points to farmer_crm
-3. Test database connection:
-   ```bash
-   PGPASSWORD=password psql -h localhost -U postgres -d farmer_crm -c "SELECT COUNT(*) FROM farmers;"
-   ```
-   Expected result: 4 farmers
-   If not 4 farmers - STOP and investigate
+2. Verify AWS environment variables configured in App Runner
+3. Test database connection via AWS RDS
+4. Expected result: 4 farmers in farmer_crm database
 
 ## TABLE VERIFICATION
 ```sql
@@ -38,10 +34,10 @@ Before proceeding, confirm:
 - ✅ Test-Ready: Validation planned
 
 ## SERVICE VERIFICATION
-Verify all services running:
-- http://localhost:8000 (API Gateway)
-- http://localhost:8006 (Mock WhatsApp)
-- http://localhost:8007 (Agronomic Dashboard)
+Verify all AWS services running:
+- https://6pmgiripe.us-east-1.awsapprunner.com (Monitoring Hub)
+- https://3ksdvgdtud.us-east-1.awsapprunner.com (Agricultural Core)
+- https://6pmgiripe.us-east-1.awsapprunner.com/database/ (Database Dashboard)
 
 ## IF CONSTITUTIONAL VIOLATION DETECTED
 1. STOP development immediately
@@ -56,3 +52,9 @@ Verify all services running:
 - Connection parameters
 - Environmental setup
 - Constitutional compliance
+
+## CONSTITUTIONAL CHECKPOINT
+Before proceeding, verify AWS deployment compatibility:
+- ✅ Database: AWS RDS connection confirmed
+- ✅ Services: AWS App Runner URLs working
+- ✅ Environment: AWS environment variables configured
