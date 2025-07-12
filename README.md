@@ -41,3 +41,9 @@ See constitutional requirements at: https://github.com/Poljopodrska/ava-olo-shar
 This shared repository contains ONLY constitutional documents - no code, no service-specific files.
 
 All service repositories (monitoring-dashboards, agricultural-core, etc.) must reference this repository for constitutional compliance.
+
+## 🆘 EMERGENCY DEVELOPER RECOVERY
+
+If the original developer is unavailable, see **EMERGENCY_DEVELOPER_RECOVERY.md** for complete system recovery procedures, AWS access details, constitutional compliance requirements, and ongoing maintenance instructions.
+
+This ensures AVA OLO can continue serving farmers worldwide regardless of developer availability.

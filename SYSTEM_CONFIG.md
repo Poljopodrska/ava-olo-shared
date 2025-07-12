@@ -67,7 +67,6 @@ monitoring/
 ## LAST VERIFIED
 - Date: 2025-07-12
 - Farmers Count: 4 (KMETIJA VRZEL - Blaž Vrzel + 3 others)
-- Database Status: Active in AWS RDS and WSL2
+- Database Status: Active on AWS RDS PostgreSQL
 - AWS Services: 2 App Runner services operational
-- Local Services: All dashboards functional
-- Constitutional Compliance: Verified
+- Constitutional Compliance: Verified for AWS deployment
