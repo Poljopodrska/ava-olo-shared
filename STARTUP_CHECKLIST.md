@@ -11,11 +11,11 @@
 1. Read SYSTEM_CONFIG.md completely
 2. Verify AWS environment variables configured in App Runner
 3. Test database connection via AWS RDS
-4. Expected result: 4 farmers in farmer_crm database
+4. Expected result: Active farmers in farmer_crm database
 
 ## TABLE VERIFICATION
 ```sql
--- Must return 34 tables
+-- Should return system tables
 SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public';
 
 -- Must show: farmers, fields, field_crops, tasks, etc.

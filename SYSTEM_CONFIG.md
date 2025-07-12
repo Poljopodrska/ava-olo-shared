@@ -10,10 +10,10 @@
 - **Database Name:** farmer_crm 
 - **Environment:** AWS RDS PostgreSQL
 - **Connection:** Via AWS environment variables (DB_HOST, DB_NAME, etc.)
-- **Current Farmers:** 4 real farmers (including KMETIJA VRZEL - Blaž Vrzel)
-- **Tables:** 34 tables (farmers, fields, field_crops, tasks, etc.)
-- **Messages:** 73 conversation messages preserved
-- **Fields:** 53 fields with 46 field crops
+- **Current Farmers:** Active farmers (including KMETIJA VRZEL - Blaž Vrzel as reference)
+- **Tables:** System tables (farmers, fields, field_crops, tasks, etc.)
+- **Messages:** Conversation messages preserved
+- **Fields:** Agricultural fields with crop plantings
 
 ## TABLE MAPPING (Constitutional Rule: Configuration Over Hardcoding)
 - farmers (NOT ava_farmers)
@@ -66,7 +66,7 @@ monitoring/
 
 ## LAST VERIFIED
 - Date: 2025-07-12
-- Farmers Count: 4 (KMETIJA VRZEL - Blaž Vrzel + 3 others)
+- Farmers Count: Active farmers (KMETIJA VRZEL - Blaž Vrzel as reference)
 - Database Status: Active on AWS RDS PostgreSQL
 - AWS Services: 2 App Runner services operational
 - Constitutional Compliance: Verified for AWS deployment

@@ -76,10 +76,10 @@ PINECONE_INDEX_NAME: pinecone-crm-index
 ### **Critical Database Details:**
 Current Data:
 
-4 active farmers (including KMETIJA VRZEL - Blaž Vrzel)
-34 database tables
-73 conversation messages preserved
-53 fields with 46 field crops
+Active farmers (including KMETIJA VRZEL - Blaž Vrzel as reference)
+System database tables
+Conversation messages preserved
+Agricultural fields with crop plantings
 
 Key Tables:
 
@@ -93,11 +93,11 @@ incoming_messages (farmer communications)
 ### **Database Recovery:**
 ```sql
 -- Verify system health
-SELECT COUNT(*) FROM farmers; -- Should return 4
-SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public'; -- Should return 34
+SELECT COUNT(*) FROM farmers; -- Should return active farmers
+SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public'; -- Should return system tables
 
 -- Key farmer verification
-SELECT name, email FROM farmers WHERE name LIKE '%Vrzel%'; -- Should show Blaž Vrzel
+SELECT name, email FROM farmers WHERE name LIKE '%Vrzel%'; -- Reference farmer for testing
 ```
 
 ## 🚀 DEPLOYMENT PROCEDURES
@@ -198,10 +198,10 @@ def test_llm_first():
 
 System is healthy when:
 - Bulgarian mango farmer can ask questions in Bulgarian
-- All 4 farmers can access their data
+- All farmers can access their data
 - No constitutional violations detected
 - All dashboards respond correctly
-- Database contains 4 farmers, 34 tables
+- Database contains active farmers and system tables
 
 ## 📜 FINAL CONSTITUTIONAL REMINDER
 
