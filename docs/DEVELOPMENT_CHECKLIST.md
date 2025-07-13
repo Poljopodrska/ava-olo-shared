@@ -16,6 +16,8 @@
 2. Am I using LLM-first approach? (🧠 LLM-FIRST)
 3. Does this maintain module independence? (🏗️ MODULE INDEPENDENCE)
 4. Am I following privacy-first principles? (🔒 PRIVACY-FIRST)
+5. Does WhatsApp number determine country localization? (🌍 COUNTRY-AWARE)
+6. Is information hierarchy respected (FARMER→COUNTRY→GLOBAL)?
 
 ## 🚫 FORBIDDEN ACTIONS
 - Creating folders like `new_dashboard/` (use existing monitoring/)

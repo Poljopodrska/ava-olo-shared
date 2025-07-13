@@ -29,6 +29,12 @@ monitoring/
 - No hardcoded language patterns
 - Supports any crop in any country
 
+#### ✅ COUNTRY-AWARE LOCALIZATION (Amendment #13)
+- WhatsApp number automatically determines country
+- System localizes based on detected country
+- Information hierarchy: FARMER → COUNTRY → GLOBAL
+- All responses tailored to farmer's location
+
 #### ✅ PRIVACY FIRST
 - Only database schema sent to LLM, never actual farmer data
 - Personal information stays in local database

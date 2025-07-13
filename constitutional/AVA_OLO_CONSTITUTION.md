@@ -1,7 +1,13 @@
 # 📜 AVA OLO CONSTITUTIONAL PRINCIPLES
 
 ## CORE PHILOSOPHY
-These 12 rules are MANDATORY for all development. Every decision must comply with ALL principles.
+These 13 rules are MANDATORY for all development. Every decision must comply with ALL principles.
+
+## 🆕 AMENDMENT #13 - COUNTRY-BASED LOCALIZATION
+See CONSTITUTIONAL_AMENDMENT_13.md for full details. Core principle:
+- WhatsApp number determines farmer's country automatically
+- System localizes all responses for that specific country
+- Information follows hierarchy: FARMER → COUNTRY → GLOBAL
 
 ### 🥭 MANGO RULE: Universal Scalability
 - Everything must work for any crop in any country
@@ -75,13 +81,21 @@ These 12 rules are MANDATORY for all development. Every decision must comply wit
 - Performance benchmarks maintained
 - Constitutional compliance verified
 
+### 🌍 COUNTRY-AWARE LOCALIZATION: WhatsApp-Driven Intelligence
+- WhatsApp number determines farmer's country (phone prefix)
+- System auto-localizes for that specific country
+- All responses tailored to farmer's location context
+- LLM intelligence handles country-specific agricultural practices
+- Information hierarchy: FARMER → COUNTRY → GLOBAL
+
 ## CONSTITUTIONAL COMPLIANCE CHECK
 Before ANY development work:
 1. Read this constitution completely
-2. Ensure your approach follows ALL 12 principles
+2. Ensure your approach follows ALL 13 principles
 3. Test mango compliance: "Would this work in Bulgaria?"
 4. Verify module independence
 5. Confirm privacy protection
+6. Check country-based localization works
 
 ## VIOLATION CONSEQUENCES
 - Constitutional violations delay deployment
