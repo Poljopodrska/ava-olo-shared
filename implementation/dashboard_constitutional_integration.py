@@ -113,42 +113,67 @@ def process_query():
         
         # Additional SQL safety checks
         safety_violations = []
+        write_operation_detected = None
         
-        # Check SQL is read-only (constitutional requirement)
+        # Check SQL operation type
         sql_upper = sql.upper().strip()
-        if not sql_upper.startswith('SELECT'):
-            safety_violations.append({
-                'principle': 'PRIVACY_FIRST',
-                'severity': 'CRITICAL',
-                'description': 'Non-SELECT SQL detected',
-                'remedy': 'Only SELECT queries allowed for safety'
-            })
         
-        # Check for dangerous SQL patterns
-        dangerous_patterns = ['DROP', 'DELETE', 'UPDATE', 'INSERT', 'ALTER', 'CREATE']
-        for pattern in dangerous_patterns:
+        # Check for write operations that need confirmation
+        write_operations = ['INSERT', 'UPDATE', 'DELETE']
+        for operation in write_operations:
+            if sql_upper.startswith(operation):
+                write_operation_detected = operation
+                # Check if user has confirmed this specific operation
+                user_confirmation = context.get('write_confirmation', '').upper()
+                if user_confirmation != operation:
+                    safety_violations.append({
+                        'principle': 'PRIVACY_FIRST',
+                        'severity': 'CONFIRMATION_REQUIRED',
+                        'description': f'{operation} operation detected - confirmation required',
+                        'remedy': f'Please type "{operation}" to confirm this write operation',
+                        'operation': operation
+                    })
+                else:
+                    # User has confirmed - add a warning but allow it
+                    safety_violations.append({
+                        'principle': 'PRIVACY_FIRST',
+                        'severity': 'WARNING',
+                        'description': f'{operation} operation confirmed by user',
+                        'remedy': 'Proceeding with write operation as confirmed'
+                    })
+        
+        # Check for other dangerous SQL patterns that are always blocked
+        always_blocked_patterns = ['DROP', 'ALTER', 'CREATE', 'TRUNCATE', 'GRANT', 'REVOKE']
+        for pattern in always_blocked_patterns:
             if pattern in sql_upper:
                 safety_violations.append({
                     'principle': 'PRIVACY_FIRST',
                     'severity': 'CRITICAL',
                     'description': f'Dangerous SQL operation: {pattern}',
-                    'remedy': 'Only read operations allowed'
+                    'remedy': 'This operation is not allowed for safety reasons'
                 })
         
-        # Check for proper farmer scoping
-        if context.get('farmer_id') and 'farmer_id' not in sql.lower():
-            safety_violations.append({
-                'principle': 'PRIVACY_FIRST',
-                'severity': 'WARNING',
-                'description': 'SQL not scoped to farmer_id',
-                'remedy': 'Add WHERE farmer_id = {farmer_id} for security'
-            })
+        # Check for proper farmer scoping (for UPDATE/DELETE operations)
+        if write_operation_detected in ['UPDATE', 'DELETE']:
+            if context.get('farmer_id') and 'farmer_id' not in sql.lower():
+                safety_violations.append({
+                    'principle': 'PRIVACY_FIRST',
+                    'severity': 'WARNING',
+                    'description': 'Write operation not scoped to farmer_id',
+                    'remedy': 'Consider adding WHERE farmer_id = {farmer_id} for safety'
+                })
+        
+        # Determine if operation needs confirmation
+        needs_confirmation = any(v['severity'] == 'CONFIRMATION_REQUIRED' for v in safety_violations)
+        is_blocked = any(v['severity'] == 'CRITICAL' for v in safety_violations)
         
         return {
-            'is_safe': len([v for v in safety_violations if v['severity'] == 'CRITICAL']) == 0,
+            'is_safe': not is_blocked and not needs_confirmation,
+            'needs_confirmation': needs_confirmation,
+            'write_operation': write_operation_detected,
             'compliance_result': result,
             'safety_violations': safety_violations,
-            'sql_approved': result.is_compliant and len(safety_violations) == 0
+            'sql_approved': result.is_compliant and not is_blocked and not needs_confirmation
         }
     
     async def validate_response(self, 
