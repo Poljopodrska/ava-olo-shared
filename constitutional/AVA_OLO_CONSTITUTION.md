@@ -1,7 +1,7 @@
 # 📜 AVA OLO CONSTITUTIONAL PRINCIPLES
 
 ## CORE PHILOSOPHY
-These 13 rules are MANDATORY for all development. Every decision must comply with ALL principles.
+These 14 rules are MANDATORY for all development. Every decision must comply with ALL principles.
 
 ## 🆕 AMENDMENT #13 - COUNTRY-BASED LOCALIZATION
 See CONSTITUTIONAL_AMENDMENT_13.md for full details. Core principle:
@@ -88,10 +88,20 @@ See CONSTITUTIONAL_AMENDMENT_13.md for full details. Core principle:
 - LLM intelligence handles country-specific agricultural practices
 - Information hierarchy: FARMER → COUNTRY → GLOBAL
 
+### 🎨 DESIGN-FIRST: Constitutional Design System
+- All AVA OLO features MUST follow the constitutional design template
+- Brown & olive agricultural color palette (exact hex values required)
+- Typography: 18px+ minimum for older farmers accessibility
+- Enter key functionality mandatory on ALL inputs
+- Mobile-first responsive design with constitutional badges
+- Atomic structure logo implementation required
+- Philosophy: Functionality ALWAYS before beauty
+- ERROR-level enforcement: Build fails if design violated
+
 ## CONSTITUTIONAL COMPLIANCE CHECK
 Before ANY development work:
 1. Read this constitution completely
-2. Ensure your approach follows ALL 13 principles
+2. Ensure your approach follows ALL 14 principles
 3. Test mango compliance: "Would this work in Bulgaria?"
 4. Verify module independence
 5. Confirm privacy protection

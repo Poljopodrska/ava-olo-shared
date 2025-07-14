@@ -1,6 +1,6 @@
 """
 Constitutional Compliance Checker
-Real-time verification of all 13 constitutional principles
+Real-time verification of all 14 constitutional principles
 
 Usage:
     from constitutional_checker import ConstitutionalChecker
@@ -47,7 +47,7 @@ class ComplianceResult:
 class ConstitutionalChecker:
     """
     Comprehensive constitutional compliance checker
-    Tests all 13 principles in real-time
+    Tests all 14 principles in real-time
     """
     
     def __init__(self):
@@ -66,7 +66,8 @@ class ConstitutionalChecker:
             'PRODUCTION_READY': self._check_production_ready,
             'CONFIGURATION': self._check_configuration,
             'TEST_DRIVEN': self._check_test_driven,
-            'COUNTRY_AWARE': self._check_country_aware
+            'COUNTRY_AWARE': self._check_country_aware,
+            'DESIGN_FIRST': self._check_design_first
         }
         
     async def check_compliance(self, 
@@ -518,6 +519,82 @@ class ConstitutionalChecker:
             'violations': violations
         }
     
+    async def _check_design_first(self, code: str, file_path: str) -> Dict[str, Any]:
+        """Check DESIGN-FIRST principle compliance (Amendment #14)"""
+        violations = []
+        
+        # Check for constitutional design system usage
+        if file_path.endswith(('.jsx', '.js', '.css', '.html')):
+            
+            # Check for constitutional color usage
+            if '#' in code and 'var(--' not in code:
+                # Look for hardcoded colors instead of CSS variables
+                color_matches = re.findall(r'#[0-9A-Fa-f]{6}', code)
+                if color_matches:
+                    violations.append({
+                        'severity': 'WARNING',
+                        'description': 'Hardcoded colors detected instead of constitutional variables',
+                        'remedy': 'Use var(--primary-brown), var(--primary-olive) etc. from constitutional design system'
+                    })
+            
+            # Check for minimum font sizes (18px for older farmers)
+            font_size_matches = re.findall(r'font-size:\s*(\d+)px', code)
+            for size_match in font_size_matches:
+                size = int(size_match)
+                if size < 18:
+                    violations.append({
+                        'severity': 'CRITICAL',
+                        'description': f'Font size {size}px below 18px minimum for older farmers',
+                        'remedy': 'Use var(--font-large) (18px) or larger for accessibility'
+                    })
+            
+            # Check for Enter key functionality in inputs
+            if '<input' in code or 'input[' in code:
+                if 'onKeyPress' not in code and 'onkeypress' not in code and 'onEnterPress' not in code:
+                    violations.append({
+                        'severity': 'CRITICAL',
+                        'description': 'Input elements missing Enter key functionality',
+                        'remedy': 'Add onKeyPress handler for Enter key functionality (constitutional requirement)'
+                    })
+            
+            # Check for constitutional class usage
+            if 'className' in code or 'class=' in code:
+                constitutional_classes = [
+                    'constitutional-header', 'constitutional-card', 'constitutional-input',
+                    'constitutional-btn', 'constitutional-form-group'
+                ]
+                has_constitutional_classes = any(cls in code for cls in constitutional_classes)
+                
+                if not has_constitutional_classes and ('className' in code or 'class=' in code):
+                    violations.append({
+                        'severity': 'WARNING',
+                        'description': 'Custom classes used instead of constitutional design system',
+                        'remedy': 'Use constitutional-* classes from design system'
+                    })
+            
+            # Check for atomic logo in headers
+            if 'header' in code.lower() or 'Header' in code:
+                if 'electron' not in code:
+                    violations.append({
+                        'severity': 'CRITICAL',
+                        'description': 'Header missing atomic structure logo',
+                        'remedy': 'Include electron1, electron2, electron3 elements for constitutional branding'
+                    })
+            
+            # Check for mobile responsiveness
+            if 'style' in code and '@media' not in code and 'responsive' not in code:
+                violations.append({
+                    'severity': 'WARNING',
+                    'description': 'Missing mobile responsiveness indicators',
+                    'remedy': 'Add @media queries or responsive design classes'
+                })
+        
+        return {
+            'compliant': len(violations) == 0,
+            'violations': violations,
+            'design_system_status': 'CONSTITUTIONAL' if len(violations) == 0 else 'NEEDS_COMPLIANCE'
+        }
+    
     def _detect_target_type(self, target) -> str:
         """Auto-detect the type of target being checked"""
         if isinstance(target, (str, Path)):
@@ -538,7 +615,7 @@ class ConstitutionalChecker:
 📈 Compliance Score: {result.overall_score:.1f}/100
 🕐 Checked: {result.timestamp}
 
-🏆 Compliant Principles ({len(result.compliant_principles)}/13):
+🏆 Compliant Principles ({len(result.compliant_principles)}/14):
 {chr(10).join(f'  ✅ {principle}' for principle in result.compliant_principles)}
 
 """
@@ -559,7 +636,7 @@ class ConstitutionalChecker:
 🎉 CONSTITUTIONAL COMPLIANCE ACHIEVED!
 🥭 The Bulgarian mango farmer is happy!
 
-This code follows all 13 constitutional principles and can serve
+This code follows all 14 constitutional principles and can serve
 farmers globally with any crop in any country.
 """
         else:

@@ -1,0 +1,382 @@
+/* Mobile Constitutional Design Rules - Principle #14: DESIGN-FIRST */
+/* Specific rules for mobile app development */
+
+/* CONSTITUTIONAL MOBILE VARIABLES */
+:root {
+    /* Mobile-specific spacing */
+    --mobile-spacing-xs: 6px;
+    --mobile-spacing-sm: 12px;
+    --mobile-spacing-md: 20px;
+    --mobile-spacing-lg: 28px;
+    --mobile-spacing-xl: 36px;
+    
+    /* Mobile touch targets (minimum 44px for accessibility) */
+    --mobile-touch-target: 44px;
+    --mobile-button-height: 48px;
+    
+    /* Mobile typography (larger for thumbs) */
+    --mobile-font-large: 20px;
+    --mobile-font-medium: 18px;
+    --mobile-font-small: 16px;
+    --mobile-font-heading: 26px;
+    --mobile-font-title: 34px;
+}
+
+/* CONSTITUTIONAL MOBILE BASE */
+@media (max-width: 768px) {
+    
+    /* Constitutional Mobile Body */
+    body {
+        font-size: var(--mobile-font-medium);
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Constitutional Mobile Header */
+    .constitutional-header {
+        padding: var(--mobile-spacing-md);
+        flex-direction: column;
+        text-align: center;
+        gap: var(--mobile-spacing-sm);
+    }
+    
+    .constitutional-brand {
+        font-size: var(--mobile-font-heading);
+    }
+    
+    .constitutional-tagline {
+        font-size: var(--mobile-font-medium);
+        margin-left: 0;
+    }
+    
+    /* Constitutional Mobile Cards */
+    .constitutional-card {
+        margin: var(--mobile-spacing-sm);
+        padding: var(--mobile-spacing-md);
+        border-radius: 12px;
+    }
+    
+    .constitutional-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--mobile-spacing-sm);
+    }
+    
+    .constitutional-card-title {
+        font-size: var(--mobile-font-heading);
+    }
+    
+    /* Constitutional Mobile Forms - LARGER INPUTS */
+    .constitutional-input,
+    .constitutional-select,
+    .constitutional-textarea {
+        font-size: var(--mobile-font-large); /* 20px for mobile */
+        padding: var(--mobile-spacing-md);
+        min-height: var(--mobile-touch-target);
+        border-radius: 8px;
+        border: 3px solid var(--light-gray); /* Thicker border for mobile */
+    }
+    
+    .constitutional-input:focus,
+    .constitutional-select:focus,
+    .constitutional-textarea:focus {
+        border-color: var(--primary-olive);
+        box-shadow: 0 0 0 4px rgba(139, 140, 90, 0.3);
+    }
+    
+    /* Constitutional Mobile Buttons - LARGER TOUCH TARGETS */
+    .constitutional-btn {
+        font-size: var(--mobile-font-large); /* 20px for mobile */
+        padding: var(--mobile-spacing-md) var(--mobile-spacing-lg);
+        min-height: var(--mobile-button-height);
+        width: 100%;
+        margin-bottom: var(--mobile-spacing-md);
+        border-radius: 8px;
+        font-weight: bold;
+    }
+    
+    /* Constitutional Mobile Grid */
+    .constitutional-grid {
+        grid-template-columns: 1fr;
+        gap: var(--mobile-spacing-md);
+    }
+    
+    /* Constitutional Mobile Table - HORIZONTAL SCROLL */
+    .constitutional-table {
+        font-size: var(--mobile-font-medium);
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .constitutional-table th,
+    .constitutional-table td {
+        padding: var(--mobile-spacing-md);
+        font-size: var(--mobile-font-medium);
+        min-width: 120px;
+    }
+    
+    /* Constitutional Mobile Navigation */
+    .constitutional-mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--primary-brown);
+        padding: var(--mobile-spacing-sm);
+        display: flex;
+        justify-content: space-around;
+        z-index: 1000;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+    }
+    
+    .constitutional-mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--white);
+        text-decoration: none;
+        font-size: var(--mobile-font-small);
+        min-height: var(--mobile-touch-target);
+        justify-content: center;
+        padding: var(--mobile-spacing-xs);
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .constitutional-mobile-nav-item:hover,
+    .constitutional-mobile-nav-item.active {
+        background: var(--primary-olive);
+    }
+    
+    .constitutional-mobile-nav-icon {
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+    
+    /* Constitutional Mobile Spacing Adjustments */
+    .constitutional-padding {
+        padding: var(--mobile-spacing-md);
+    }
+    
+    .constitutional-margin-top {
+        margin-top: var(--mobile-spacing-md);
+    }
+    
+    .constitutional-margin-bottom {
+        margin-bottom: var(--mobile-spacing-md);
+    }
+    
+    /* Constitutional Mobile Status Indicators */
+    .status {
+        font-size: var(--mobile-font-medium);
+        padding: var(--mobile-spacing-xs) var(--mobile-spacing-sm);
+    }
+    
+    .constitutional-badge {
+        font-size: var(--mobile-font-medium);
+        padding: var(--mobile-spacing-xs) var(--mobile-spacing-md);
+    }
+}
+
+/* CONSTITUTIONAL MOBILE LANDSCAPE */
+@media (max-width: 768px) and (orientation: landscape) {
+    .constitutional-header {
+        flex-direction: row;
+        padding: var(--mobile-spacing-sm) var(--mobile-spacing-md);
+    }
+    
+    .constitutional-tagline {
+        margin-left: auto;
+    }
+    
+    .constitutional-mobile-nav {
+        padding: var(--mobile-spacing-xs);
+    }
+    
+    .constitutional-mobile-nav-item {
+        min-height: 40px;
+    }
+}
+
+/* CONSTITUTIONAL MOBILE-SPECIFIC COMPONENTS */
+
+/* Mobile Query Input */
+.constitutional-mobile-query {
+    position: fixed;
+    bottom: var(--mobile-spacing-xl);
+    left: var(--mobile-spacing-md);
+    right: var(--mobile-spacing-md);
+    background: var(--white);
+    border-radius: 25px;
+    padding: var(--mobile-spacing-sm);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    gap: var(--mobile-spacing-sm);
+    z-index: 999;
+}
+
+.constitutional-mobile-query-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: var(--mobile-font-large);
+    padding: var(--mobile-spacing-sm);
+    outline: none;
+}
+
+.constitutional-mobile-query-btn {
+    background: var(--primary-olive);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: var(--mobile-touch-target);
+    height: var(--mobile-touch-target);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Mobile FAB (Floating Action Button) */
+.constitutional-mobile-fab {
+    position: fixed;
+    bottom: calc(var(--mobile-spacing-xl) * 2);
+    right: var(--mobile-spacing-lg);
+    width: 56px;
+    height: 56px;
+    background: var(--success-green);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    box-shadow: 0 6px 20px rgba(107, 139, 35, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    transition: all 0.3s ease;
+}
+
+.constitutional-mobile-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(107, 139, 35, 0.6);
+}
+
+/* Mobile Sheet/Modal */
+.constitutional-mobile-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: var(--mobile-spacing-lg);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.constitutional-mobile-sheet.open {
+    transform: translateY(0);
+}
+
+.constitutional-mobile-sheet-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--light-gray);
+    border-radius: 2px;
+    margin: 0 auto var(--mobile-spacing-md) auto;
+}
+
+/* Mobile Card Stack */
+.constitutional-mobile-card-stack {
+    padding: var(--mobile-spacing-md);
+    padding-bottom: calc(var(--mobile-spacing-xl) * 2); /* Space for fixed nav */
+}
+
+/* Mobile Loading States */
+.constitutional-mobile-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mobile-spacing-xl);
+    font-size: var(--mobile-font-large);
+    color: var(--medium-gray);
+}
+
+.constitutional-mobile-loading::before {
+    content: '🔄';
+    margin-right: var(--mobile-spacing-sm);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* CONSTITUTIONAL MOBILE ACCESSIBILITY */
+@media (max-width: 768px) {
+    
+    /* Larger touch targets for older farmers */
+    button,
+    input,
+    select,
+    textarea,
+    a {
+        min-height: var(--mobile-touch-target);
+        min-width: var(--mobile-touch-target);
+    }
+    
+    /* Higher contrast for mobile */
+    .constitutional-input:focus,
+    .constitutional-select:focus,
+    .constitutional-textarea:focus {
+        border-width: 3px;
+    }
+    
+    /* Larger text for readability */
+    p, div, span {
+        font-size: var(--mobile-font-medium);
+        line-height: 1.6;
+    }
+    
+    /* Improved tap feedback */
+    .constitutional-btn:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* CONSTITUTIONAL MOBILE DARK MODE (Future) */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+    :root {
+        --cream: #2C2C2C;
+        --white: #1E1E1E;
+        --dark-charcoal: #E8E8E6;
+        --light-gray: #404040;
+    }
+    
+    .constitutional-mobile-nav {
+        background: var(--dark-olive);
+    }
+}
+
+/* CONSTITUTIONAL MOBILE PRINT STYLES */
+@media print and (max-width: 768px) {
+    .constitutional-mobile-nav,
+    .constitutional-mobile-fab,
+    .constitutional-mobile-query {
+        display: none;
+    }
+    
+    .constitutional-mobile-card-stack {
+        padding-bottom: 0;
+    }
+}

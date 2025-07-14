@@ -1,0 +1,36 @@
+{
+  "versions": [
+    {
+      "version_number": "0.0.1",
+      "timestamp": "2025-07-13T10:04:20.759791",
+      "description": "Initial version - Constitutional system initialized",
+      "git_commit": "d078f89a2393096431f1446708ac988a3d5a736c",
+      "git_branch": "main",
+      "files_changed": [],
+      "constitutional_compliance": true,
+      "compliance_score": 100.0,
+      "deployment_status": "local",
+      "aws_deployment_url": null,
+      "author": "developer",
+      "environment": "development"
+    },
+    {
+      "version_number": "0.0.2",
+      "timestamp": "2025-07-14T09:08:11.678788",
+      "description": "Emergency fix: DATABASE_URL format for agricultural-core deployment",
+      "git_commit": "fef990c22e5e277c983cc7070f2120038484e4d9",
+      "git_branch": "main",
+      "files_changed": [
+        "constitutional/AVA_OLO_CONSTITUTION.md",
+        "implementation/constitutional_checker.py"
+      ],
+      "constitutional_compliance": true,
+      "compliance_score": 83.57142857142858,
+      "deployment_status": "local",
+      "aws_deployment_url": null,
+      "author": "developer",
+      "environment": "development"
+    }
+  ],
+  "current_version": "0.0.2"
+}

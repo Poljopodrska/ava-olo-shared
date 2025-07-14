@@ -1,0 +1,469 @@
+/* AVA OLO Constitutional Design System - Constitutional Principle #14 */
+/* 🏛️ ERROR-LEVEL ENFORCEMENT: Build fails if design violated */
+
+:root {
+    /* CONSTITUTIONAL COLOR PALETTE - Brown & Olive Agricultural Theme */
+    --primary-brown: #6B5B73;
+    --primary-olive: #8B8C5A;
+    --dark-olive: #5D5E3F;
+    --light-olive: #A8AA6B;
+    --accent-green: #7A8B5A;
+    --earth-brown: #8B7355;
+    --cream: #F5F3F0;
+    --dark-charcoal: #2C2C2C;
+    --medium-gray: #666666;
+    --light-gray: #E8E8E6;
+    --white: #FFFFFF;
+    --error-red: #C85450;
+    --success-green: #6B8E23;
+    --warning-orange: #D2691E;
+    
+    /* CONSTITUTIONAL TYPOGRAPHY - Larger for older farmers */
+    --font-large: 18px;    /* MINIMUM size for accessibility */
+    --font-medium: 16px;
+    --font-small: 14px;
+    --font-heading: 24px;
+    --font-title: 32px;
+    
+    /* CONSTITUTIONAL SPACING */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* CONSTITUTIONAL LAYOUT */
+    --border-radius: 8px;
+    --box-shadow: 0 2px 12px rgba(107, 91, 115, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* CONSTITUTIONAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CONSTITUTIONAL BASE STYLES */
+body {
+    font-family: 'Arial', sans-serif;
+    background: var(--cream);
+    color: var(--dark-charcoal);
+    font-size: var(--font-large); /* CONSTITUTIONAL: 18px minimum */
+    line-height: 1.5;
+}
+
+/* CONSTITUTIONAL HEADER */
+.constitutional-header {
+    background: linear-gradient(135deg, var(--primary-brown), var(--dark-olive));
+    color: var(--white);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    box-shadow: var(--box-shadow);
+}
+
+/* CONSTITUTIONAL ATOMIC LOGO */
+.constitutional-logo {
+    width: 48px;
+    height: 48px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.constitutional-logo::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--primary-brown);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 3;
+}
+
+.constitutional-logo::after {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--primary-brown);
+    border-radius: 50%;
+    top: 8px;
+    left: 8px;
+    z-index: 1;
+}
+
+.constitutional-logo .electron1,
+.constitutional-logo .electron2,
+.constitutional-logo .electron3 {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--dark-olive);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.constitutional-logo .electron1 {
+    top: 6px;
+    left: 22px;
+}
+
+.constitutional-logo .electron2 {
+    top: 18px;
+    left: 12px;
+}
+
+.constitutional-logo .electron3 {
+    top: 18px;
+    left: 32px;
+}
+
+.constitutional-brand {
+    font-size: var(--font-title);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.constitutional-tagline {
+    font-size: var(--font-medium);
+    opacity: 0.9;
+    margin-left: auto;
+}
+
+/* CONSTITUTIONAL CARDS */
+.constitutional-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--primary-olive);
+    margin-bottom: var(--spacing-lg);
+}
+
+.constitutional-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.constitutional-card-title {
+    font-size: var(--font-heading);
+    color: var(--primary-brown);
+    font-weight: bold;
+}
+
+/* CONSTITUTIONAL BADGES */
+.constitutional-badge {
+    background: var(--success-green);
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 12px;
+    font-size: var(--font-small);
+    font-weight: bold;
+}
+
+/* CONSTITUTIONAL FORMS - LARGER FOR ACCESSIBILITY */
+.constitutional-form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.constitutional-label {
+    display: block;
+    font-weight: bold;
+    color: var(--dark-olive);
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-medium);
+}
+
+.constitutional-input {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--light-gray);
+    border-radius: 6px;
+    font-size: var(--font-large); /* CONSTITUTIONAL: 18px minimum */
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.constitutional-input:focus {
+    outline: none;
+    border-color: var(--primary-olive);
+    box-shadow: 0 0 0 3px rgba(139, 140, 90, 0.2);
+}
+
+.constitutional-select {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--light-gray);
+    border-radius: 6px;
+    font-size: var(--font-large); /* CONSTITUTIONAL: 18px minimum */
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.constitutional-textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--light-gray);
+    border-radius: 6px;
+    font-size: var(--font-large); /* CONSTITUTIONAL: 18px minimum */
+    background: var(--white);
+    transition: var(--transition);
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* CONSTITUTIONAL BUTTONS - LARGE AND CLEAR */
+.constitutional-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: 6px;
+    font-size: var(--font-large); /* CONSTITUTIONAL: 18px minimum */
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 48px;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    display: inline-block;
+}
+
+.constitutional-btn-primary {
+    background: var(--primary-olive);
+    color: var(--white);
+}
+
+.constitutional-btn-primary:hover {
+    background: var(--dark-olive);
+    transform: translateY(-1px);
+}
+
+.constitutional-btn-secondary {
+    background: var(--light-gray);
+    color: var(--dark-charcoal);
+}
+
+.constitutional-btn-success {
+    background: var(--success-green);
+    color: var(--white);
+}
+
+.constitutional-btn-error {
+    background: var(--error-red);
+    color: var(--white);
+}
+
+/* CONSTITUTIONAL STATUS INDICATORS */
+.status {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 12px;
+    font-size: var(--font-small);
+    font-weight: bold;
+}
+
+.status-success {
+    background: var(--success-green);
+    color: var(--white);
+}
+
+.status-warning {
+    background: var(--warning-orange);
+    color: var(--white);
+}
+
+.status-error {
+    background: var(--error-red);
+    color: var(--white);
+}
+
+/* CONSTITUTIONAL DATA TABLES */
+.constitutional-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-md);
+}
+
+.constitutional-table th,
+.constitutional-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+    font-size: var(--font-medium);
+}
+
+.constitutional-table th {
+    background: var(--light-olive);
+    color: var(--white);
+    font-weight: bold;
+    font-size: var(--font-large); /* CONSTITUTIONAL: 18px minimum */
+}
+
+.constitutional-table tr:hover {
+    background: rgba(139, 140, 90, 0.05);
+}
+
+/* CONSTITUTIONAL GRID LAYOUT */
+.constitutional-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.constitutional-grid-full {
+    grid-column: 1 / -1;
+}
+
+/* CONSTITUTIONAL MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    .constitutional-header {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .constitutional-tagline {
+        margin-left: 0;
+    }
+    
+    .constitutional-brand {
+        font-size: var(--font-heading);
+    }
+    
+    .constitutional-card {
+        padding: var(--spacing-md);
+    }
+    
+    .constitutional-input,
+    .constitutional-select,
+    .constitutional-textarea,
+    .constitutional-btn {
+        font-size: var(--font-large); /* CONSTITUTIONAL: Maintain 18px on mobile */
+    }
+}
+
+/* CONSTITUTIONAL COMPLIANCE INDICATOR */
+.constitutional-status-indicator {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: var(--success-green);
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 20px;
+    font-size: var(--font-small);
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* CONSTITUTIONAL VIOLATIONS - ERROR STYLES */
+.constitutional-violation-error {
+    background: var(--error-red);
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-large);
+    font-weight: bold;
+}
+
+.constitutional-violation-warning {
+    background: var(--warning-orange);
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-large);
+    font-weight: bold;
+}
+
+/* CONSTITUTIONAL DESIGN VALIDATION CLASSES */
+.constitutional-compliant {
+    border: 2px solid var(--success-green);
+}
+
+.constitutional-violation {
+    border: 2px solid var(--error-red);
+    animation: constitutionalViolationPulse 2s infinite;
+}
+
+@keyframes constitutionalViolationPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* CONSTITUTIONAL ACCESSIBILITY HELPERS */
+.constitutional-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* CONSTITUTIONAL UTILITY CLASSES */
+.constitutional-text-center { text-align: center; }
+.constitutional-text-left { text-align: left; }
+.constitutional-text-right { text-align: right; }
+
+.constitutional-margin-top { margin-top: var(--spacing-md); }
+.constitutional-margin-bottom { margin-bottom: var(--spacing-md); }
+.constitutional-margin-left { margin-left: var(--spacing-md); }
+.constitutional-margin-right { margin-right: var(--spacing-md); }
+
+.constitutional-padding { padding: var(--spacing-md); }
+.constitutional-padding-large { padding: var(--spacing-lg); }
+.constitutional-padding-small { padding: var(--spacing-sm); }
+
+/* CONSTITUTIONAL CHART CONTAINERS */
+.constitutional-chart-container {
+    height: 300px;
+    background: linear-gradient(135deg, rgba(139, 140, 90, 0.1), rgba(107, 91, 115, 0.1));
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: var(--spacing-md);
+}
+
+.constitutional-chart-placeholder {
+    font-size: var(--font-heading);
+    color: var(--medium-gray);
+    text-align: center;
+}
+
+/* CONSTITUTIONAL PRINT STYLES */
+@media print {
+    .constitutional-header,
+    .constitutional-status-indicator {
+        display: none;
+    }
+    
+    .constitutional-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--light-gray);
+    }
+    
+    body {
+        background: var(--white);
+        color: var(--dark-charcoal);
+        font-size: 12pt;
+    }
+}
