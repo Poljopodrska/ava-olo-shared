@@ -30,7 +30,21 @@
       "aws_deployment_url": null,
       "author": "developer",
       "environment": "development"
+    },
+    {
+      "version_number": "0.0.3",
+      "timestamp": "2025-07-14T12:56:11.908052",
+      "description": "Added dashboard landing page with 3-dashboard navigation",
+      "git_commit": "d84f50f56cf5038635e72177eb9da23b07c0f8c4",
+      "git_branch": "main",
+      "files_changed": [],
+      "constitutional_compliance": true,
+      "compliance_score": 82.85714285714286,
+      "deployment_status": "local",
+      "aws_deployment_url": null,
+      "author": "developer",
+      "environment": "development"
     }
   ],
-  "current_version": "0.0.2"
+  "current_version": "0.0.3"
 }
