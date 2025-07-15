@@ -44,7 +44,76 @@
       "aws_deployment_url": null,
       "author": "developer",
       "environment": "development"
+    },
+    {
+      "version_number": "0.0.4",
+      "timestamp": "2025-07-14T12:58:46.512261",
+      "description": "Dashboard landing page v0.0.3",
+      "git_commit": "d84f50f56cf5038635e72177eb9da23b07c0f8c4",
+      "git_branch": "main",
+      "files_changed": [
+        "safety_systems/install_git_hooks.sh",
+        "safety_systems/enhanced_version_system.py",
+        "templates/placeholder_dashboard.html",
+        "safety_systems/constitutional_deploy.sh",
+        "safety_systems/README.md",
+        "version_history.json",
+        "SAFETY_SYSTEM_REVIEW_MODE_COMPLETE.md",
+        "safety_systems/proactive_deployment_guard.py",
+        "dashboard_landing.py",
+        "safety_systems/enable_health_dashboards.sh",
+        "docs/SAFETY_SYSTEM_USAGE_GUIDE.md",
+        "templates/health_dashboard_agricultural.html",
+        "safety_systems/pre-push-hook.sh",
+        "templates/dashboard_landing.html",
+        "templates/health_dashboard_monitoring.html",
+        "safety_systems/emergency_rollback.sh",
+        "web_dashboard/comprehensive_health_dashboard.html",
+        "safety_systems/validate_installation.sh",
+        "docs/SAFETY_SYSTEM_IMPLEMENTATION_PLAN.md",
+        "safety_systems/enable_full_system.sh",
+        "safety_systems/setup_safety_system.sh",
+        "safety_systems/pre_deploy_check.sh"
+      ],
+      "constitutional_compliance": true,
+      "compliance_score": 82.85714285714286,
+      "deployment_status": "local",
+      "aws_deployment_url": null,
+      "author": "developer",
+      "environment": "development"
+    },
+    {
+      "version_number": "0.0.5",
+      "timestamp": "2025-07-14T14:25:52.922492",
+      "description": "BACKUP: Pre-database enhancement state",
+      "git_commit": "932b565c051c1472b6e86685fefc6e352738f363",
+      "git_branch": "main",
+      "files_changed": [
+        "version_history.json"
+      ],
+      "constitutional_compliance": true,
+      "compliance_score": 82.85714285714286,
+      "deployment_status": "local",
+      "aws_deployment_url": null,
+      "author": "developer",
+      "environment": "development"
+    },
+    {
+      "version_number": "0.0.6",
+      "timestamp": "2025-07-14T14:34:12.994069",
+      "description": "Enhanced database dashboard with constitutional data insertion functionality",
+      "git_commit": "932b565c051c1472b6e86685fefc6e352738f363",
+      "git_branch": "main",
+      "files_changed": [
+        "version_history.json"
+      ],
+      "constitutional_compliance": true,
+      "compliance_score": 82.85714285714286,
+      "deployment_status": "local",
+      "aws_deployment_url": null,
+      "author": "developer",
+      "environment": "development"
     }
   ],
-  "current_version": "0.0.3"
+  "current_version": "0.0.6"
 }

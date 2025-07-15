@@ -4,7 +4,7 @@
 
 ## 🏛️ Constitutional Principles
 
-AVA OLO operates under 13 supreme constitutional principles:
+AVA OLO operates under 15 supreme constitutional principles:
 
 ### 🥭 The MANGO RULE (Most Important!)
 *"Would this work for a Bulgarian mango farmer?"* - Every feature must work for any crop in any country.
@@ -23,6 +23,8 @@ AVA OLO operates under 13 supreme constitutional principles:
 11. **📊 TRANSPARENCY** - All actions logged and traceable
 12. **🛡️ ERROR ISOLATION** - Failures don't cascade
 13. **🌍 COUNTRY LOCALIZATION** - Smart detection with minority support
+14. **🎨 DESIGN-FIRST** - Constitutional design system enforcement
+15. **🧠 LLM-GENERATED INTELLIGENCE** - Amendment #15: "If the LLM can write it, don't code it"
 
 ## 📁 Repository Structure
 
@@ -73,12 +75,14 @@ ava-olo-shared/
 
 ### Architecture & Design
 - 🏗️ **[System Architecture](architecture/CURRENT_SYSTEM_ARCHITECTURE.md)** - How AVA OLO works
+- 🏛️ **[CAVA Specification](architecture/CAVA_TECHNICAL_SPECIFICATION.md)** - Conversation Architecture (NEW!)
 - ☁️ **[AWS Deployment](architecture/AWS_DEPLOYMENT_ARCHITECTURE.md)** - Infrastructure details
 - 📡 **[API Reference](architecture/API_ENDPOINTS_REFERENCE.md)** - All endpoints
 
 ### Constitutional Compliance
 - 📜 **[Constitution](constitutional/AVA_OLO_CONSTITUTION.md)** - The supreme law
 - 🌍 **[Amendment #13](constitutional/CONSTITUTIONAL_AMENDMENT_13.md)** - Smart localization
+- 🧠 **[Amendment #15](constitutional/AVA_OLO_CONSTITUTION.md#amendment-15)** - LLM-Generated Intelligence
 - ✅ **[Compliance Guide](constitutional/CONSTITUTIONAL_COMPLIANCE.md)** - Stay constitutional
 
 ### Emergency Procedures

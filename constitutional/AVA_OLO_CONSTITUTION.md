@@ -1,7 +1,7 @@
 # 📜 AVA OLO CONSTITUTIONAL PRINCIPLES
 
 ## CORE PHILOSOPHY
-These 14 rules are MANDATORY for all development. Every decision must comply with ALL principles.
+These 15 rules are MANDATORY for all development. Every decision must comply with ALL principles.
 
 ## 🆕 AMENDMENT #13 - COUNTRY-BASED LOCALIZATION
 See CONSTITUTIONAL_AMENDMENT_13.md for full details. Core principle:
@@ -98,14 +98,24 @@ See CONSTITUTIONAL_AMENDMENT_13.md for full details. Core principle:
 - Philosophy: Functionality ALWAYS before beauty
 - ERROR-level enforcement: Build fails if design violated
 
+### 🧠 AMENDMENT #15 - LLM-GENERATED INTELLIGENCE
+- LLM generates 95%+ of business logic, database queries, and responses
+- Zero custom coding for specific farming scenarios
+- Universal conversation engine handles ANY crop, ANY question automatically
+- System adapts to watermelon, Bulgarian mango, and unknown crops without code changes
+- Constitutional directive: "If the LLM can write it, don't code it"
+- Maximum AI intelligence + Minimal universal execution engines
+- Revolutionary zero-code approach for agricultural conversations
+
 ## CONSTITUTIONAL COMPLIANCE CHECK
 Before ANY development work:
 1. Read this constitution completely
-2. Ensure your approach follows ALL 14 principles
+2. Ensure your approach follows ALL 15 principles
 3. Test mango compliance: "Would this work in Bulgaria?"
 4. Verify module independence
 5. Confirm privacy protection
 6. Check country-based localization works
+7. Validate LLM-generated intelligence compliance (Amendment #15)
 
 ## VIOLATION CONSEQUENCES
 - Constitutional violations delay deployment
