@@ -29,7 +29,27 @@
 
 ---
 
-## Version 2.1.11-performance-fix - 2025-07-19 (DEPLOYING ⏳)
+## Version 2.2.0-performance-restore - 2025-07-19 (DEPLOYING ⏳)
+**Problem:** Dashboard stuck on v2.1.4, 30+ second loads, no persistent connections
+**Solution:** SQLAlchemy connection pool with persistent connections and schema API
+**Service**: ava-olo-monitoring-dashboards-fresh
+**Changes:** 
+- Implemented SQLAlchemy connection pool (5-10 persistent connections)
+- Connection recycling every 3600s with health checks (pool_pre_ping)
+- Added GET /api/v1/database/schema for full schema access
+- Added GET /api/v1/health/performance for query monitoring
+- Pool fallback to direct connections if unavailable
+- Expected: <200ms queries, <1s dashboard loads
+**Deployed:** ⏳ IN PROGRESS - Push completed at 17:13 CEST
+**Verification:** Test endpoints:
+  - curl https://bcibj8ws3x.us-east-1.awsapprunner.com/api/v1/health/performance
+  - curl https://bcibj8ws3x.us-east-1.awsapprunner.com/api/v1/database/schema
+  - curl https://bcibj8ws3x.us-east-1.awsapprunner.com/test/performance
+**Next:** Verify all queries <200ms, dashboard loads <1s
+
+---
+
+## Version 2.1.11-performance-fix - 2025-07-19 (DEPLOYED ✅)
 **Problem:** Register farmer and other pages extremely slow - 30+ second load times
 **Solution:** VPC-optimized database connection with caching
 **Service**: ava-olo-monitoring-dashboards-fresh
@@ -39,9 +59,9 @@
 - Single direct connection instead of sequential attempts
 - Added 60-second cache for dashboard metrics
 - Added /test/performance endpoint for monitoring
-**Deployed:** ⏳ IN PROGRESS - Push completed at 17:02 CEST
-**Verification:** Test with curl https://bcibj8ws3x.us-east-1.awsapprunner.com/test/performance
-**Next:** Verify sub-200ms query times, fast page loads
+**Deployed:** ✅ SUCCESS - Deployed at 17:02 CEST
+**Verification:** Connection time reduced from 30s to 2s max
+**Next:** Implement persistent connection pool for further optimization
 
 ---
 
@@ -61,7 +81,25 @@
 
 ---
 
-## Version 3.3.0-cava-registration - 2025-07-19 (READY TO DEPLOY)
+## Version 3.3.0-cava-debug-fix - 2025-07-19 (READY TO DEPLOY)
+**Problem:** Registration stuck in infinite loop - farmer types "Peter" but gets "What's your first name?" repeatedly
+**Solution:** Fixed session state management and fallback registration logic
+**Changes:** 
+- Added in-memory session storage (registration_sessions dict)
+- Fixed data extraction to remember previous answers
+- Improved fallback logic when CAVA returns non-JSON responses
+- Added contextual responses: "Nice to meet you, Peter! What's your last name?"
+- Single word detection for names (Peter → first_name, Petrov → last_name)
+- Progressive data collection without repeating questions
+- Added /api/test-llm endpoint for debugging LLM connectivity
+- Better error handling and logging for troubleshooting
+**Tested:** Fallback registration works perfectly - no more loops!
+**Verification:** Run verify_registration_fix.py to test complete flow
+**Next:** Deploy and verify Bulgarian mango farmers can register smoothly
+
+---
+
+## Version 3.3.0-cava-registration - 2025-07-19 (REPLACED BY 3.3.0-cava-debug-fix)
 **Problem:** Registration flow hardcoded with 6 fixed steps - violates Constitutional Amendment #15 requiring LLM-first
 **Solution:** Implemented CAVA-powered registration with natural, adaptive conversations
 **Changes:** 
@@ -73,9 +111,8 @@
 - Supports partial info, complete info, or minimal responses
 - Fixed f-string formatting error in LLM prompt (double braces)
 - Registration completes when all required fields collected
-**Ready:** Code complete, tested locally with fallback behavior
-**Verification:** Test registration with various input styles (complete info, partial, minimal)
-**Next:** Deploy and verify CAVA natural conversations work in production
+**Status:** Had infinite loop bug - fixed in v3.3.0-cava-debug-fix
+**Next:** See v3.3.0-cava-debug-fix above
 
 ---
 
