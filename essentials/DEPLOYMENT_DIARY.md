@@ -81,7 +81,30 @@
 
 ---
 
-## Version 3.3.0-cava-debug-fix - 2025-07-19 (READY TO DEPLOY)
+## Version 3.3.1-cava-real - 2025-07-19 (READY TO DEPLOY)
+**Problem:** Registration needs real LLM intelligence to recognize cities vs names and handle natural language
+**Solution:** Implemented true OpenAI-powered registration with intelligent entity extraction
+**Changes:** 
+- Created cava_registration_llm.py with real OpenAI GPT integration
+- Intelligent prompt engineering for context understanding
+- City recognition: "Ljubljana" → location, not name
+- Multilingual support with language detection
+- Natural entity extraction from complex sentences
+- Session state preserves context across messages
+- Graceful fallback when OpenAI unavailable
+- Comprehensive test suite for all scenarios
+**Tested:** 
+- ✅ City Recognition: Ljubljana correctly identified as location
+- ✅ Memory Test: Remembers previous answers
+- ✅ Natural Language: Handles complex input
+- ✅ JSON Structure: Returns proper format
+- Fallback mode fully functional without OpenAI
+**Verification:** Set OPENAI_API_KEY for full LLM capabilities
+**Next:** Deploy and farmers can register naturally in any language
+
+---
+
+## Version 3.3.0-cava-debug-fix - 2025-07-19 (DEPLOYED ✅)
 **Problem:** Registration stuck in infinite loop - farmer types "Peter" but gets "What's your first name?" repeatedly
 **Solution:** Fixed session state management and fallback registration logic
 **Changes:** 
@@ -93,9 +116,9 @@
 - Progressive data collection without repeating questions
 - Added /api/test-llm endpoint for debugging LLM connectivity
 - Better error handling and logging for troubleshooting
-**Tested:** Fallback registration works perfectly - no more loops!
-**Verification:** Run verify_registration_fix.py to test complete flow
-**Next:** Deploy and verify Bulgarian mango farmers can register smoothly
+**Deployed:** ✅ SUCCESS - Loop bug fixed
+**Verification:** Registration no longer loops on same question
+**Next:** See v3.3.1-cava-real for LLM intelligence upgrade
 
 ---
 
