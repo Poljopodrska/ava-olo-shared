@@ -1,0 +1,30 @@
+Your ECR Repository URIs:
+
+Monitoring: 127679825789.dkr.ecr.us-east-1.amazonaws.com/ava-olo/monitoring-dashboards
+Agricultural: 127679825789.dkr.ecr.us-east-1.amazonaws.com/ava-olo/agricultural-core
+
+<~Xzntr2r~m6-7)~4*MO(Mul>#YW
+
+# Store database host
+aws secretsmanager create-secret \
+    --name ava-olo/db-host \
+    --secret-string "farmer-crm-production.cifgmm0mqg5q.us-east-1.rds.amazonaws.com" \
+    --region us-east-1
+
+# Store database name
+aws secretsmanager create-secret \
+    --name ava-olo/db-name \
+    --secret-string "farmer_crm" \
+    --region us-east-1
+
+# Store database user
+aws secretsmanager create-secret \
+    --name ava-olo/db-user \
+    --secret-string "postgres" \
+    --region us-east-1
+
+# Store database password - REPLACE YOUR-DB-PASSWORD with your actual password
+aws secretsmanager create-secret \
+    --name ava-olo/db-password \
+    --secret-string "Y<~Xzntr2r~m6-7)~4*MO(Mul>#YW" \
+    --region us-east-1
