@@ -169,7 +169,47 @@ class SoilAnalysisModule:
 - Check DATABASE_SCHEMA.md for current structure
 - NEVER manually edit DATABASE_SCHEMA.md (auto-updated)
 
-### 5. Testing Requirements
+### 5. Version Management Rules
+
+#### ❌ NO HARDCODING OF VERSIONS - EVER!
+**Problem**: Hardcoded versions cause deployments to always show the same version, breaking version tracking and deployment verification.
+
+**Examples of what NOT to do:**
+```python
+# ❌ NEVER DO THIS
+VERSION = "2.1.4"  # Hardcoded - will never update!
+
+# ❌ NEVER DO THIS
+def get_version():
+    return "2.1.4"  # Hardcoded!
+
+# ❌ NEVER DO THIS
+response = {"version": "2.1.4", "status": "ok"}  # Hardcoded!
+```
+
+**✅ CORRECT Approach:**
+```python
+# ✅ Always use dynamic version from config/environment
+from config import VERSION  # Imported from central config
+
+# ✅ Or from environment variable
+VERSION = os.getenv('APP_VERSION', 'development')
+
+# ✅ Or from a version file that gets updated
+with open('version.txt', 'r') as f:
+    VERSION = f.read().strip()
+
+# ✅ Or from git tags
+VERSION = subprocess.check_output(['git', 'describe', '--tags']).decode().strip()
+```
+
+**Version Update Process:**
+1. Update version in ONE central location (config.py, version.txt, or environment)
+2. All modules import/read from that single source
+3. Deploy scripts update the central version
+4. Verification confirms the new version is live
+
+### 6. Testing Requirements
 ```python
 def test_mango_rule():
     # Every feature must pass

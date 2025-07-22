@@ -1,0 +1,50 @@
+{
+  "documented_at": "2025-07-21T09:58:00Z",
+  "working_versions": {
+    "agricultural-core": {
+      "alb_endpoint": "http://ava-olo-farmers-alb-82735690.us-east-1.elb.amazonaws.com",
+      "version": "v3.3.2-7d13ca06",
+      "task_definition": "ava-agricultural-task:5",
+      "ecr_image": "127679825789.dkr.ecr.us-east-1.amazonaws.com/ava-olo/agricultural-core:latest",
+      "health_check": "/health",
+      "service_name": "agricultural-core"
+    },
+    "monitoring-dashboards": {
+      "alb_endpoint": "http://ava-olo-internal-alb-426050720.us-east-1.elb.amazonaws.com",
+      "version": "v3.3.2-git-auth-test-633a1ad0",
+      "task_definition": "ava-monitoring-task:9",
+      "ecr_image": "127679825789.dkr.ecr.us-east-1.amazonaws.com/ava-olo/monitoring-dashboards:latest",
+      "health_check": "/health",
+      "service_name": "monitoring-dashboards"
+    }
+  },
+  "key_fixes_applied": {
+    "dockerfiles": {
+      "issue": "Referenced non-existent files (agricultural_core_constitutional.py)",
+      "fix": "Updated to use main.py as entry point",
+      "added_dependencies": ["gcc", "python3-dev", "curl"]
+    },
+    "secrets": {
+      "issue": "Invalid escape sequence \\! in admin password",
+      "fix": "Removed escape sequence, using plain exclamation mark",
+      "working_format": "SecureAdminP@ssw0rd2024!"
+    },
+    "version_hardcoding": {
+      "issue": "Version hardcoded as v3.3.1 in config.py",
+      "fix": "Updated to v3.3.2 in modules/core/config.py"
+    }
+  },
+  "deployment_pipeline": {
+    "trigger": "git push to main branch",
+    "github_actions": ".github/workflows/deploy-ecs.yml",
+    "codebuild_projects": [
+      "ava-agricultural-docker-build",
+      "ava-monitoring-docker-build"
+    ],
+    "ecs_cluster": "ava-olo-production",
+    "target_groups": {
+      "agricultural": "arn:aws:elasticloadbalancing:us-east-1:127679825789:targetgroup/ava-farmers-tg/d1394d67a8492b35",
+      "monitoring": "arn:aws:elasticloadbalancing:us-east-1:127679825789:targetgroup/ava-monitoring-internal-tg/b83d1f3792d315fb"
+    }
+  }
+}

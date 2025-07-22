@@ -1,0 +1,53 @@
+{
+  "family": "agricultural-core",
+  "taskRoleArn": "arn:aws:iam::127679825789:role/ava-olo-ecs-task-role",
+  "executionRoleArn": "arn:aws:iam::127679825789:role/ava-olo-ecs-task-execution-role",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "containerDefinitions": [
+    {
+      "name": "agricultural",
+      "image": "127679825789.dkr.ecr.us-east-1.amazonaws.com/ava-olo/agricultural-core:latest",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {"name": "PORT", "value": "8080"},
+        {"name": "ENVIRONMENT", "value": "production"},
+        {"name": "SERVICE_NAME", "value": "agricultural-core"},
+        {"name": "VERSION", "value": "v3.3.26-verify-services"},
+        {"name": "DB_HOST", "value": "farmer-crm-production.cifgmm0mqg5q.us-east-1.rds.amazonaws.com"},
+        {"name": "DB_NAME", "value": "farmer_crm"},
+        {"name": "DB_USER", "value": "postgres"},
+        {"name": "DB_PORT", "value": "5432"}
+      ],
+      "secrets": [
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:127679825789:secret:rds!db-3283fb31-adf6-4e45-8fa8-9b2bb0702c06-3H8gvb:password::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/agricultural-core",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

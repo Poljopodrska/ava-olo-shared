@@ -15,6 +15,13 @@ See CONSTITUTIONAL_AMENDMENT_13.md for full details. Core principle:
 - No hardcoded Croatian/regional patterns allowed
 - LLM intelligence handles all language/crop variations
 
+**CLARIFICATION**: The MANGO RULE means our system must be universal. "Bulgarian mango farmer" represents:
+- **Unexpected combinations** (exotic crop + non-tropical country)
+- **Language diversity** (Cyrillic script, not just Latin)
+- **No assumptions** (works equally well for wheat in England or mangoes in Bulgaria)
+- **True universality** (not optimized for "normal" cases)
+See `/essentials/MANGO_RULE_CLARIFICATION.md` for full explanation.
+
 ### 🗄️ POSTGRESQL ONLY: Single Database
 - Database: farmer_crm on AWS RDS PostgreSQL
 - Connection: AWS environment variables (DB_HOST, DB_NAME, etc.)

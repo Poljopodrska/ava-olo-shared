@@ -1,10 +1,71 @@
 # AVA OLO Specification Guidelines
 *For Web-based Claude to write feature specifications*
 
-## Important Abbreviation
-**TS = TASK SPECIFICATION FOR CLAUDE CODE**
-- When you see "TS" anywhere, it means "TASK SPECIFICATION FOR CLAUDE CODE"
+## Communication Protocol for Web-based Claude
+
+### Clarification Process
+When receiving instructions, web-based Claude should:
+
+1. **Evaluate Understanding**: For every instruction, determine if clarification is needed
+2. **Ask Numbered Questions**: If clarification is required, ask numbered questions:
+   - **1.** [First question]
+   - **2.** [Second question]
+   - etc.
+
+3. **Use Lettered Options** (preferred): When possible, provide multiple choice answers:
+   - **Question 1:** Which deployment approach should we use?
+     - **a)** ECS deployment with rolling updates
+     - **b)** App Runner deployment with instant scaling
+     - **c)** Lambda-based serverless approach
+
+4. **Avoid Unnecessary Questions**: If the instruction is clear, proceed without inventing questions
+
+### Task Assignment Priority
+
+**ABSOLUTE PRIORITY: Claude Code (c.code)**
+- Before starting any task, Claude should determine: "Can Claude Code handle this?"
+- If YES → **c.code has absolute priority**
+- Claude Code is capable of:
+  - TypeScript/JavaScript development
+  - File manipulation and code generation
+  - Database operations and API development
+  - Testing and deployment verification
+  - Git operations and version control
+
+**FALLBACK: Human**
+- Only assign tasks to human when c.code genuinely cannot handle them
+- Examples of human-only tasks:
+  - External service setup requiring manual verification
+  - Business decisions requiring domain expertise
+  - Physical hardware configurations
+  - Third-party account setups requiring manual approval
+
+### Communication Flow
+1. Receive instruction
+2. Ask clarifying questions (if needed, using numbered/lettered format)
+3. **WAIT for all answers before proceeding**
+4. Once all questions are answered, determine if c.code can handle the task
+5. If YES: Create TS (Task Specification) for c.code
+6. If NO: Document why and assign to human
+
+**IMPORTANT**: Do NOT write a TS until all clarifying questions have been answered. First clarify, then specify.
+
+---
+
+## Standard Abbreviations Vocabulary
+
+**Essential abbreviations for all communication:**
+
+**TS** = **TASK SPECIFICATION FOR CLAUDE CODE**
+- When you see "TS" or "ts" anywhere, it means "TASK SPECIFICATION FOR CLAUDE CODE"
 - These specifications follow the template below for Claude Code to implement
+
+**CC** = **CLAUDE CODE**  
+- When you see "CC" or "cc" anywhere, it means "Claude Code"
+- The CLI-based coding assistant with absolute task priority
+- Example: "CC should handle this TypeScript development task"
+
+*Both web-based Claude and Claude Code must recognize these abbreviations*
 
 ## The 5-Step Recipe
 
@@ -16,6 +77,8 @@
 6. **GIVE IMPLEMENTATION GUIDANCE** - Concrete steps, specific approaches
 
 ## Specification Template (TS Format)
+
+**Format**: Always provide the complete TS in a code block (using triple backticks ```) so it can be easily copied with the copy button. This makes it convenient for users to copy the entire specification with a single click.
 
 ```
 TS - TASK SPECIFICATION FOR CLAUDE CODE

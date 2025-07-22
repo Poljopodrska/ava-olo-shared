@@ -25,9 +25,9 @@
   - Agricultural chat with LLM intelligence
   - WhatsApp integration
   - Farmer authentication and profiles
-- **URL**: https://ujvej9snpp.us-east-1.awsapprunner.com
-- **Current Production**: v3.2.5-bulletproof
-- **Development**: v3.3.0-ecs-ready (containerized)
+- **URL**: http://ava-olo-farmers-alb-82735690.us-east-1.elb.amazonaws.com (ECS)
+- **Current Production**: v3.3.26-verify-services (ECS)
+- **Previous**: v3.2.5-bulletproof (App Runner - decommissioned)
 
 ### **ava-olo-monitoring-dashboards-fresh**
 - **Purpose**: Business intelligence and system monitoring
@@ -41,6 +41,129 @@
 - **URL**: https://bcibj8ws3x.us-east-1.awsapprunner.com
 - **Current Production**: v2.2.5-bulletproof
 - **Development**: v2.3.0-ecs-ready (containerized)
+
+---
+
+## 2025-07-22 05:28:00 UTC | 07:28:00 CET - Connected GPT-4 to Farmer Chat with Weather Integration [🚀 DEPLOYMENT]
+**Deployed to Production**: YES ✅ - Agricultural Core v3.3.27-services-connected
+**Service**: Agricultural Core (ECS)
+**Success Criteria**: ✅ Code deployed with service connections ready
+
+### MANGO TEST READY! 🥭
+**Kmetija Vrzel will be able to**:
+- ✅ Chat with real GPT-4 responses (when API key added)
+- ✅ See Ljubljana weather with coordinate proof
+- ✅ Get farming advice with weather context
+- ✅ Access debug endpoints showing service status
+
+### Changes Made:
+1. **Enhanced Weather Service**:
+   - Added location proof to weather responses
+   - Shows requested vs actual coordinates
+   - Includes API call timestamp and city verification
+   - Default location: Ljubljana (46.0569°N, 14.5058°E)
+
+2. **Updated Chat Integration**:
+   - Chat context now includes current weather data
+   - Temperature, humidity, and conditions in farmer context
+   - GPT-4 model configured and ready
+   - Weather-aware agricultural advice
+
+3. **Debug Endpoints Created**:
+   - `/api/v1/debug/services` - Basic service status
+   - `/api/v1/debug/services/detailed` - Full proof with test responses
+   - `/api/v1/chat/status` - Chat connection status
+   - `/api/v1/chat/debug` - Chat configuration details
+
+### Technical Details:
+- **OpenAI Integration**: GPT-4 model configured, awaiting API key
+- **Weather Proof**: Returns requested/actual coordinates for verification
+- **Context Enhancement**: Chat includes weather, location, fields, crops
+- **Version**: v3.3.27-services-connected (build_id: 866854c0)
+
+### Current Status:
+- **Code Deployed**: ✅ All service integration code live
+- **API Keys Required**: Both OPENAI_API_KEY and OPENWEATHER_API_KEY need to be added to ECS task definition
+- **Endpoints Working**: Chat and weather services ready to connect
+- **Debug Available**: Multiple endpoints for service verification
+
+### To Complete Setup:
+1. Add OPENAI_API_KEY to ECS task definition
+2. Add OPENWEATHER_API_KEY to ECS task definition
+3. Update ECS service to use new task definition
+
+---
+
+## 2025-07-22 04:30:00 UTC | 06:30:00 CET - Fixed Database Password Encoding for Monitoring Dashboards [🔧 REFACTORING]
+**Deployed to Production**: PENDING 🔄 - Monitoring Dashboards v3.3.16-password-fix
+**Service**: Monitoring Dashboards (ECS)
+**Issue**: Database connection failing with "password authentication failed"
+**Root Cause**: 
+- SQLAlchemy was receiving URL-encoded password instead of raw password
+- Special characters (<, >, #) were being double-encoded
+- DATABASE_URL environment variable contained old incorrect password
+
+**Solution**:
+- Updated `database_pool.py` to pass raw password via connect_args
+- Removed DATABASE_URL from ECS task definition (revision 15)
+- Applied same connection approach as agricultural-core service
+
+**Key Changes**:
+- `database_pool.py`: Changed from URL-encoded password to `connect_args["password"]`
+- Task Definition: Removed DATABASE_URL to force reconstruction from DB_* variables
+- Version: v3.3.16-password-fix
+
+**Status**: Code fixed, awaiting Docker build and deployment
+
+---
+
+## 2025-07-22 04:12:00 UTC | 06:12:00 CET - Successfully Deployed v3.3.26 to ECS [🚀 DEPLOYMENT]
+**Deployed to Production**: YES ✅ - Agricultural Core v3.3.26-verify-services
+**Service**: Agricultural Core (ECS)
+**Success Criteria**: ✅ All requirements achieved - Version deployed and services working
+
+### MANGO TEST PASSED! 🥭
+**Kmetija Vrzel can now**:
+- ✅ See v3.3.26-verify-services on version endpoint
+- ✅ Access debug endpoint at /api/v1/debug/services
+- ✅ Service runs stable without reverting
+- ✅ Task definition uses latest ECR image
+
+### Changes Made:
+1. **Fixed Missing Module Import**:
+   - Removed import of non-existent `modules.auth.security`
+   - Allowed service to start successfully
+   - Committed fix to repository
+
+2. **Created Clean Task Definition**:
+   - Revision 4 without AWS Secrets Manager issues
+   - Direct environment variables for database
+   - Correct container name and port (8080)
+   - CloudWatch log group created
+
+3. **Forced ECS Deployment**:
+   - Updated service to use new task definition
+   - Service now running with 2 desired tasks
+   - ALB responding with correct version
+
+### Technical Details:
+- **Task Definition**: agricultural-core:4
+- **Version**: v3.3.26-verify-services (build_id: 49fd8f09)
+- **Container Port**: 8080
+- **ECS Cluster**: ava-olo-production
+- **ALB**: ava-olo-farmers-alb-82735690.us-east-1.elb.amazonaws.com
+
+### Issues Resolved:
+1. ✅ Task definition secrets permission issue
+2. ✅ CloudWatch log group missing
+3. ✅ Module import error in debug_services.py
+4. ✅ Service stuck on old version
+
+### Current Status:
+- **Version Endpoint**: Returns v3.3.26-verify-services ✅
+- **Debug Endpoint**: Working at /api/v1/debug/services ✅
+- **Service Health**: Running stable on ECS ✅
+- **Task Count**: Running as configured ✅
 
 ---
 
@@ -95,19 +218,28 @@
    - Error: "Task failed ELB health checks"
 
 ### Actions Taken:
-1. Updated ECS task definition with correct DB_PASSWORD (revision 12)
-2. Discovered health check port mismatch preventing deployment
-3. Current status: Old task stopped, new tasks failing health checks
+1. ✅ Updated ECS task definition with correct DB_PASSWORD (revision 12)
+2. ✅ Fixed health check port configuration  
+3. ✅ Verified application runs on port 8080 (correct)
+4. ⚠️ Application containers starting but not responding to health checks
 
-### Next Steps Required:
-1. Fix target group health check port from 8080 to 8000
-2. Or update container to listen on port 8080
-3. Once health checks pass, database connection will work with correct password
+### Current Status:
+- Database credentials: FIXED (correct password in task definition revision 12)
+- Health check configuration: FIXED (port 8080, path "/")
+- Container deployment: Starting but failing health checks
+- Tasks are starting then timing out and being replaced
 
-### Key Findings:
-- Database password was incorrect in ECS (different from local .env)
-- Health check misconfiguration is blocking all deployments
-- v3.3.14 code with debug endpoints hasn't deployed due to health check failures
+### Root Issue Identified:
+Application containers are starting but not becoming healthy. This could be due to:
+- Application startup errors (database connection preventing startup)
+- Missing environment variables in containers
+- Application not binding to 0.0.0.0:8080 correctly
+
+### Next Steps:
+1. Check CloudWatch logs for application startup errors
+2. Verify environment variables are loaded in container
+3. Consider temporary health check on simple endpoint
+4. Once app starts successfully, database connection should work
 
 ---
 
