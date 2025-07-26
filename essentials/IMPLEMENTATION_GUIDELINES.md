@@ -82,6 +82,28 @@ curl https://api.ava-olo.com/version
 
 **NO TASK IS COMPLETE WITHOUT VERSION VERIFICATION!**
 
+## 🚀 MANDATORY DEPLOYMENT STEPS
+
+**EVERY implementation MUST end with:**
+
+1. **Git Commit & Push:**
+```bash
+git add -A
+git commit -m "feat/fix/chore: descriptive message"
+git push origin main
+```
+
+2. **Verify GitHub Actions:**
+   - Check deployment triggered
+   - Wait for green checkmark  
+   - Verify version updated on ALB
+
+3. **NO TASK IS COMPLETE WITHOUT:**
+   - ✅ Code pushed to Git
+   - ✅ GitHub Actions successful
+   - ✅ Feature accessible on production
+   - ✅ SYSTEM_CHANGELOG.md updated
+
 ### 🚨 CRITICAL: Task Completion Rules
 1. Deploy your version (e.g., v2.1.7)
 2. Check deployed version matches YOUR version

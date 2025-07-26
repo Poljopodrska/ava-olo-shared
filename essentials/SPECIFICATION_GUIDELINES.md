@@ -52,6 +52,27 @@ When receiving instructions, web-based Claude should:
 
 ---
 
+## 📝 MANDATORY GIT PUSH REQUIREMENT
+
+**EVERY Task Specification MUST include Git push commands in the implementation.**
+
+This is MANDATORY to ensure:
+- All changes are deployed automatically via GitHub Actions
+- No manual deployments bypass Git (security requirement)
+- Bulgarian mango farmers get updates immediately
+- All deployments are traceable to Git commits
+
+**Standard Git Push Block (include in EVERY TS):**
+```bash
+# After implementing all changes:
+git add -A
+git commit -m "feat: [brief description of what was implemented]"
+git push origin main
+
+# Verify deployment triggered:
+echo "Check GitHub Actions for deployment status"
+```
+
 ## Standard Abbreviations Vocabulary
 
 **Essential abbreviations for all communication:**
@@ -114,6 +135,18 @@ IMPLEMENTATION APPROACH (Required):
 - [Example code snippets or patterns]
 - [Integration points and API endpoints]
 - Note: Claude Code should discuss any implementation challenges
+
+MANDATORY - Git Push & Deploy:
+```bash
+# After implementing all changes:
+git add -A
+git commit -m "feat: [brief description of what was implemented]"
+git push origin main
+
+# Verify deployment triggered:
+# Agricultural: https://github.com/Poljopodrska/ava-olo-agricultural-core/actions
+# Monitoring: https://github.com/Poljopodrska/ava-olo-monitoring-dashboards/actions
+```
 ```
 
 ## Good vs Bad Specifications
@@ -178,6 +211,18 @@ IMPLEMENTATION APPROACH (Required):
 - Integration: Call CAVA service for conversational follow-up questions
 - Example: `soil_service.interpret(file, farmer_id)` returns structured interpretation
 - Note: Claude Code should discuss if technical constraints require adjustments
+
+MANDATORY - Git Push & Deploy:
+```bash
+# After implementing all changes:
+git add -A
+git commit -m "feat: soil analysis interpreter with AI recommendations"
+git push origin main
+
+# Verify deployment triggered:
+# Agricultural: https://github.com/Poljopodrska/ava-olo-agricultural-core/actions
+# Monitoring: https://github.com/Poljopodrska/ava-olo-monitoring-dashboards/actions
+```
 ```
 
 ## Database Schema Reference
