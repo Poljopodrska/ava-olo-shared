@@ -1,0 +1,18 @@
+{
+  "total_violations": 4,
+  "by_severity": {
+    "CRITICAL": 4,
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0
+  },
+  "by_file": {
+    "/mnt/c/Users/HP/ava-olo-constitutional/ava-olo-agricultural-core/database/data_validators.py": 2,
+    "/mnt/c/Users/HP/ava-olo-constitutional/ava-olo-monitoring-dashboards/database/data_validators.py": 2
+  },
+  "compliance_score": 0,
+  "top_violating_files": [
+    [
+      "/mnt/c/Users/HP/ava-olo-constitutional/ava-olo-agricultural-core/database/data_validators.py",
+      [
+        
