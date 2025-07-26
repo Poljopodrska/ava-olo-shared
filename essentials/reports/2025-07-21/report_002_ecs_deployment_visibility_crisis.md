@@ -118,9 +118,9 @@ docker tag image:latest $ECR_URI:v3.3.2
 docker tag image:latest $ECR_URI:latest
 ```
 
-## Comparison with App Runner Issues
+## Comparison with ECS Issues
 Similar pattern identified:
-- App Runner: Python bytecode caching prevented updates
+- ECS: Python bytecode caching prevented updates
 - ECS: Failed deployments prevent updates
 - Both: Changes deploy but old version keeps running
 - Root similarity: Deployment completes but wrong code serves traffic

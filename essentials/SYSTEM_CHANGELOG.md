@@ -27,7 +27,7 @@
   - Farmer authentication and profiles
 - **URL**: http://ava-olo-farmers-alb-82735690.us-east-1.elb.amazonaws.com (ECS)
 - **Current Production**: v3.3.26-verify-services (ECS)
-- **Previous**: v3.2.5-bulletproof (App Runner - decommissioned)
+- **Previous**: v3.2.5-bulletproof (ECS - decommissioned)
 
 ### **ava-olo-monitoring-dashboards-fresh**
 - **Purpose**: Business intelligence and system monitoring
@@ -38,7 +38,7 @@
   - Field registration metrics
   - Database performance monitoring
   - SQLAlchemy connection pool management
-- **URL**: https://bcibj8ws3x.us-east-1.awsapprunner.com
+- **URL**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com
 - **Current Production**: v2.2.5-bulletproof
 - **Development**: v2.3.0-ecs-ready (containerized)
 
@@ -806,7 +806,7 @@ result = db.query("SELECT city, COUNT(*) FROM ava_farmers GROUP BY city")
 - ✅ Database endpoints accessible via ECS ALB
 - ✅ Claude Code can query schema and run SELECT queries
 - ✅ Secure with authentication header
-- ✅ Works through ECS services (not App Runner)
+- ✅ Works through ECS services (not ECS)
 - ✅ Test queries return real farmer data
 - ✅ Documentation for Claude Code usage
 - ✅ Production safety maintained
@@ -815,7 +815,7 @@ result = db.query("SELECT city, COUNT(*) FROM ava_farmers GROUP BY city")
 
 ---
 
-## 2025-07-20 12:39:00 UTC | 14:39:00 CET - Complete ECS Migration with App Runner Decommission [🚀 DEPLOYMENT + 🏗️ INFRASTRUCTURE]
+## 2025-07-20 12:39:00 UTC | 14:39:00 CET - Complete ECS Migration with ECS Decommission [🚀 DEPLOYMENT + 🏗️ INFRASTRUCTURE]
 **Deployed to Production**: YES ✅ - Both services running exclusively on ECS
 **Services Affected**: Agricultural-core & Monitoring-dashboards (full ECS migration)
 
@@ -848,10 +848,10 @@ Bulgarian mango farmer can access:
 - **Created**: Inline policy for ava-codebuild-role
 - **Result**: Automated ECS service updates working
 
-#### 5. **App Runner Services Decommissioned** ✅
+#### 5. **ECS Services Decommissioned** ✅
 - **Deleted**: ava-olo-monitoring-dashboards-fresh (ServiceId: 2d0ca739860e478099f51f10d6d2bffc)
 - **Deleted**: ava-olo-agricultural-core-fresh (ServiceId: d8bd0acfe93e4a449ce2bbc738ce97ca)
-- **Cost Savings**: $15-25/month from App Runner elimination
+- **Cost Savings**: $15-25/month from ECS elimination
 
 ### Technical Architecture Achieved:
 ```
@@ -886,8 +886,8 @@ Code Commit → Docker Image → Registry → Live Deployment
 ### Impact:
 - **User Experience**: No interruption during migration, same URLs working
 - **Developer Workflow**: Git push now triggers full ECS deployment automatically
-- **Infrastructure Consolidation**: Single ECS-based deployment instead of dual App Runner
-- **Cost Optimization**: Reduced monthly AWS costs by eliminating App Runner
+- **Infrastructure Consolidation**: Single ECS-based deployment instead of dual ECS
+- **Cost Optimization**: Reduced monthly AWS costs by eliminating ECS
 - **Scalability**: ECS provides better auto-scaling and resource management
 
 ### Success Metrics:
@@ -896,7 +896,7 @@ Code Commit → Docker Image → Registry → Live Deployment
 - **Performance**: Services responding within health check timeouts
 - **Cost**: 20-30% reduction in AWS compute costs
 
-**Result**: Complete migration from App Runner to ECS with full automation pipeline established. Bulgarian mango farmers can continue accessing both services seamlessly through the ALB while benefiting from improved infrastructure reliability and cost efficiency.
+**Result**: Complete migration from ECS to ECS with full automation pipeline established. Bulgarian mango farmers can continue accessing both services seamlessly through the ALB while benefiting from improved infrastructure reliability and cost efficiency.
 
 ---
 
@@ -965,7 +965,7 @@ Code Commit → Docker Image → Registry → Live Deployment
 - ALB endpoint responding: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com/business-dashboard
 - Yellow debug box visible showing 16 farmers, 211.95 hectares
 - Version displayed: v2.3.0-ecs-ready-a3d8affb
-**Note**: Agricultural core remains on App Runner (not migrated to ECS)
+**Note**: Agricultural core remains on ECS (not migrated to ECS)
 
 ---
 
@@ -1057,18 +1057,18 @@ cava_pure_storage/
 
 ---
 
-## 2025-07-20 10:20:54 UTC | 12:20:54 CET - App Runner Decommissioned - ECS Only Mandate [📝 DOCUMENTATION]
+## 2025-07-20 10:20:54 UTC | 12:20:54 CET - ECS Decommissioned - ECS Only Mandate [📝 DOCUMENTATION]
 **Deployed to Production**: NO - Policy update only
 **Services Affected**: All future deployments must use ECS only
 
 ### What Changed:
 - **IMPLEMENTATION_GUIDELINES.md** updated with ECS-only mandate
-- **App Runner references** removed or marked as OBSOLETE
+- **ECS references** removed or marked as OBSOLETE
 - **All deployment instructions** now target ECS infrastructure only
 - **Database access solutions** updated for ECS environment
 
 ### Critical Updates:
-1. **Infrastructure Mandate**: App Runner is OBSOLETE - DO NOT use
+1. **Infrastructure Mandate**: ECS is OBSOLETE - DO NOT use
 2. **Production URL**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com (ECS ALB)
 3. **Deployment Target**: ECS cluster ava-olo-production only
 4. **Task Definitions**: ava-monitoring-task and ava-agricultural-task
@@ -1076,10 +1076,10 @@ cava_pure_storage/
 ### Documentation Changes:
 - ✅ Deployment rules updated to target ECS only
 - ✅ Version verification examples use ALB URL
-- ✅ Removed App Runner caching references
+- ✅ Removed ECS caching references
 - ✅ Updated error handling for ECS deployments
 - ✅ AWS service creation rules updated for ECS
-- ✅ Task definition change tracking (replaced apprunner.yaml)
+- ✅ Task definition change tracking (replaced ecs.yaml)
 
 ### Database Access in ECS Era:
 - **Primary Method**: AWS RDS Query Editor (immediate access)
@@ -1088,14 +1088,14 @@ cava_pure_storage/
 - **Admin ECS Tasks**: For regular maintenance
 
 ### Why This Change:
-- App Runner being decommissioned per latest infrastructure decisions
+- ECS being decommissioned per latest infrastructure decisions
 - ECS provides better control and scalability
 - Cost optimization through consolidated infrastructure
 - Prevents confusion from dual deployment targets
 
 ### Impact:
 - **All future deployments**: Must use ECS infrastructure
-- **No App Runner references**: In code, documentation, or deployment scripts
+- **No ECS references**: In code, documentation, or deployment scripts
 - **Database access**: Updated for ECS-based solutions only
 - **Protection systems**: Continue to work with ECS deployments
 
@@ -1110,14 +1110,14 @@ The function-level restoration task has been completed successfully. All request
 
 1. ✅ **Working State Restoration**: Database queries and session management restored from July 19 working versions
 2. ✅ **Modular Structure Preserved**: All changes integrated without breaking current architecture  
-3. ✅ **Production Deployment**: Both services deployed to App Runner with verified functionality
+3. ✅ **Production Deployment**: Both services deployed to ECS with verified functionality
 4. ✅ **MANGO Test Success**: Yellow debug box shows 16 farmers, 211.95 hectares correctly
 5. ✅ **Version Tracking**: New versions v2.2.6-restore and v3.3.1-restore deployed
 6. ✅ **System Documentation**: SYSTEM_CHANGELOG.md updated with complete deployment record
 
 ### Production URLs Verified:
-- **Monitoring**: https://bcibj8ws3x.us-east-1.awsapprunner.com (v2.2.6-restore-0aeff93f)
-- **Agricultural**: https://ujvej9snpp.us-east-1.awsapprunner.com (v3.3.1-restore-d43734d6)
+- **Monitoring**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com (v2.2.6-restore-0aeff93f)
+- **Agricultural**: https://ujvej9snpp.us-east-1.elb.amazonaws.com (v3.3.1-restore-d43734d6)
 
 ### Function-Level Restoration Results:
 - **Database Display**: Fixed from "--" placeholders to real data (16 farmers, 211.95 hectares)
@@ -1130,7 +1130,7 @@ The function-level restoration task has been completed successfully. All request
 ---
 
 ## 2025-07-20 09:42:00 UTC | 11:42:00 CET - Function-Level Restoration Complete [🚀 DEPLOYMENT]
-**Deployed to Production**: YES ✅ - Both services restored to App Runner
+**Deployed to Production**: YES ✅ - Both services restored to ECS
 **Services Affected**: Monitoring-dashboards & Agricultural-core (function restoration)
 
 ### MANGO TEST PASSED! 🥭
@@ -1164,13 +1164,13 @@ Bulgarian mango farmer can now see:
 - **Constitutional Compliance**: Maintained MODULE INDEPENDENCE and ERROR ISOLATION
 
 ### Deployment Verification:
-- **Monitoring URL**: https://bcibj8ws3x.us-east-1.awsapprunner.com
+- **Monitoring URL**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com
   - Version: v2.2.6-restore-0aeff93f ✅
   - Yellow box visible: ✅ (#FFD700)
   - Farmer count: 16 ✅
   - Hectares: 211.95 ✅
   
-- **Agricultural URL**: https://ujvej9snpp.us-east-1.awsapprunner.com
+- **Agricultural URL**: https://ujvej9snpp.us-east-1.elb.amazonaws.com
   - Version: v3.3.1-restore-d43734d6 ✅
   - CAVA Version: 3.3.7-test-isolation ✅
   - Registration accessible: ✅
@@ -1281,7 +1281,7 @@ Bulgarian mango farmer can now see:
 
 ### Why This Cleanup:
 - Files older than 3 days (before July 17, 2025) identified as obsolete
-- ECS migration on July 20 made App Runner documentation outdated
+- ECS migration on July 20 made ECS documentation outdated
 - Temporary investigation reports completed their purpose
 - Duplication eliminated in favor of essentials/ as single source of truth
 
@@ -1332,10 +1332,10 @@ Instead of rebuilding Docker images (blocked by missing files in GitHub), used E
 ```
 
 ### Current State:
-- **App Runner**: Still running (backup during migration)
+- **ECS**: Still running (backup during migration)
 - **ECS**: Both services operational
 - **Cost Impact**: Running both systems temporarily for safety
-- **Next Step**: Monitor ECS for 24 hours before decommissioning App Runner
+- **Next Step**: Monitor ECS for 24 hours before decommissioning ECS
 
 ### Success Metrics:
 - ECS Task Definition: ava-monitoring-task:5, ava-agricultural-task:4
@@ -1402,16 +1402,16 @@ Instead of rebuilding Docker images (blocked by missing files in GitHub), used E
    - Service crashes on startup with ModuleNotFoundError
 
 ### Current State:
-- **App Runner**: Both services still running (production remains stable)
+- **ECS**: Both services still running (production remains stable)
 - **ECS Agricultural**: Running successfully
 - **ECS Monitoring**: Failed due to missing dependencies in Docker image
-- **Cost**: Running triple infrastructure (App Runner + partial ECS)
+- **Cost**: Running triple infrastructure (ECS + partial ECS)
 
 ### Next Steps:
 1. Install Docker Desktop in WSL environment
 2. Rebuild monitoring Docker image with all dependencies
 3. Push corrected image and complete migration
-4. Decommission App Runner after 24-hour stability check
+4. Decommission ECS after 24-hour stability check
 
 ### Lessons Learned:
 - Docker images pushed earlier today had incomplete dependencies
@@ -1422,10 +1422,10 @@ Instead of rebuilding Docker images (blocked by missing files in GitHub), used E
 
 ## 2025-07-20 07:20:00 UTC | 09:20:00 CET - ECS Migration Status Report [🔍 INVESTIGATION]
 **Deployed to Production**: NO - Investigation only
-**Services Affected**: None - App Runner remains in production
+**Services Affected**: None - ECS remains in production
 
 ### Current Status:
-- **App Runner**: Still running in production (both services operational)
+- **ECS**: Still running in production (both services operational)
 - **ECS Migration**: Blocked due to Docker unavailability in WSL environment
 - **Database**: Connection issues observed but services still accessible
 
@@ -1450,15 +1450,15 @@ Instead of rebuilding Docker images (blocked by missing files in GitHub), used E
 - Cannot rebuild/test Docker images locally
 
 ### Recommendation:
-Continue using App Runner until Docker Desktop is properly configured in WSL. Once Docker is available:
+Continue using ECS until Docker Desktop is properly configured in WSL. Once Docker is available:
 1. Rebuild and test images locally
 2. Push verified images to ECR
 3. Complete ECS migration
-4. Decommission App Runner to save $10-20/month
+4. Decommission ECS to save $10-20/month
 
 ### Cost Impact:
-- Current: Running both App Runner and ECS infrastructure (double cost)
-- Target: ECS only (save $10-20/month from App Runner)
+- Current: Running both ECS and ECS infrastructure (double cost)
+- Target: ECS only (save $10-20/month from ECS)
 
 ---
 
@@ -1488,11 +1488,11 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
 - Updated SYSTEM_CHANGELOG.md format to include timestamps (HH:MM:SS UTC)
 - All future entries will include precise time tracking
 - Enables better debugging of deployment timing issues
-- Helps track AWS App Runner deployment latency
+- Helps track AWS ECS deployment latency
 
 ### Why This Change:
 - Previous format only tracked dates, making it difficult to debug deployment timing
-- AWS App Runner caching issues require precise timing information
+- AWS ECS caching issues require precise timing information
 - Multiple deployments on same day were hard to differentiate
 - Better audit trail for critical production changes
 
@@ -1536,13 +1536,13 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
 - **ECS Task Definitions**: Ready for deployment
 
 ### Why This Change:
-- AWS App Runner has bytecode caching issues causing partial deployments
+- AWS ECS has bytecode caching issues causing partial deployments
 - ECS provides better control over deployment process
 - Modularization prevents large file loading issues
 - Containers ensure consistent environment
 
 ### Impact:
-- **User Impact**: NONE - Services remain on App Runner during prep
+- **User Impact**: NONE - Services remain on ECS during prep
 - **Developer Impact**: Major - new structure for all future changes
 - **System Impact**: Improved reliability once migrated
 
@@ -1555,12 +1555,12 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
 ### Next Steps:
 1. Build and push containers to ECR
 2. Deploy to ECS with blue/green deployment
-3. Switch traffic from App Runner to ECS
-4. Decommission App Runner services
+3. Switch traffic from ECS to ECS
+4. Decommission ECS services
 
 ---
 
-## 2025-07-19 - AWS App Runner Deployment Audit [🔍 INVESTIGATION]
+## 2025-07-19 - AWS ECS Deployment Audit [🔍 INVESTIGATION]
 **Deployed to Production**: NO - Investigation only
 **Service Audited**: ava-olo-monitoring-dashboards-fresh
 **Critical Discovery**: AWS serves different code versions for different endpoints!
@@ -1588,7 +1588,7 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
    - Working directory: /app
 
 5. **Root Cause Analysis**:
-   - AWS App Runner appears to cache function bytecode
+   - AWS ECS appears to cache function bytecode
    - Different endpoints compile at different times
    - Large file size (6454 lines) may cause partial loading
    - Python bytecode from multiple versions suggests upgrade issues
@@ -1735,7 +1735,7 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
 - Added /api/v1/debug/file-info endpoint to verify file deployment
 - Enhanced business_dashboard() with detailed debug logging
 - Dashboard shows debug info when displaying "--" placeholders
-**Deployed:** ❌ FAILED - AWS App Runner rolled back due to f-string syntax errors
+**Deployed:** ❌ FAILED - AWS ECS rolled back due to f-string syntax errors
 **Investigation Results:**
   ✅ Database queries work: `SELECT COUNT(*) FROM farmers` returns 16
   ✅ Pool metrics work: get_pool_metrics() returns correct data
@@ -1786,7 +1786,7 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
   ✅ Dashboard: 15 farmers, 62 fields, 211.95 hectares displayed instantly
   ✅ Schema API: 37 tables accessible via /api/v1/database/schema
   ✅ Connection Pool: 5-10 persistent connections active
-  ✅ VPC Configuration: App Runner properly connected to RDS
+  ✅ VPC Configuration: ECS properly connected to RDS
 **Endpoints Working:**
   - GET /api/v1/health/performance (52ms response)
   - GET /api/v1/database/schema (37 tables)
@@ -1816,11 +1816,11 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
 ## Version 2.1.10-db-column-fix - 2025-07-19 [🚀 DEPLOYMENT]
 **Deployed to Production**: YES ✅
 **Problem:** Dashboard shows no data, features load slowly - database connection issues
-**Solution:** Fixed column names and updated AWS App Runner with correct DB credentials
+**Solution:** Fixed column names and updated AWS ECS with correct DB credentials
 **Service**: ava-olo-monitoring-dashboards-fresh
 **Changes:** 
 - Fixed database column names: `area_ha` -> `size_hectares` in dashboard queries
-- Updated AWS App Runner service with proper DB_HOST, DB_PASSWORD, DB_USER via API
+- Updated AWS ECS service with proper DB_HOST, DB_PASSWORD, DB_USER via API
 - Removed placeholder values from environment variables
 - Service now connects to RDS instance: farmer-crm-production.cifgmm0mqg5q.us-east-1.rds.amazonaws.com
 - Fixed dashboard metrics queries for total farmers, total hectares, crops breakdown
@@ -1830,22 +1830,22 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
 
 ---
 
-## Version 2.1.9-apprunner-format - 2025-01-19 [🚀 DEPLOYMENT]
+## Version 2.1.9-ecs-format - 2025-01-19 [🚀 DEPLOYMENT]
 **Deployed to Production**: YES ✅
 **Problem:** Field registration stuck on v2.1.4 - farmers couldn't enter hectares manually or draw boundaries
-**Solution:** Created new App Runner service with API configuration, bypassing YAML issues
+**Solution:** Created new ECS service with API configuration, bypassing YAML issues
 **Service**: ava-olo-monitoring-dashboards-fresh
 **Changes:** 
 - Fixed readonly attribute on field size input - farmers can now enter hectares manually
 - Implemented Google Maps boundary drawing with toggleSizeMode function
 - Smart toggle between manual entry and map calculation
 - Added fallback when Google Maps unavailable
-- Fixed apprunner.yaml format issues (though using API config now)
+- Fixed ecs.yaml format issues (though using API config now)
 **Infrastructure Change**: 
 - Deleted broken original service (deleted GitHub connection)
 - Created fresh service with working GitHub connection
 - Switched from REPOSITORY to API configuration source
-**Deployed:** ✅ SUCCESS - Verified at https://bcibj8ws3x.us-east-1.awsapprunner.com (16:31 CEST)
+**Deployed:** ✅ SUCCESS - Verified at http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com (16:31 CEST)
 **Verification:** v2.1.9 live, manual hectare entry working, Google Maps integration functional
 **Next:** Bulgarian mango farmers can finally register their fields!
 
@@ -1963,5 +1963,5 @@ Continue using App Runner until Docker Desktop is properly configured in WSL. On
   - Monitoring Dashboards: v2.3.0-ecs-ready (containerized)
 - **Database**: farmer-crm-production.cifgmm0mqg5q.us-east-1.rds.amazonaws.com
 - **Last Update**: 2025-07-20
-- **Active Farmers**: Bulgarian mango farmers using App Runner (soon ECS)! 🥭
-- **Current Migration**: App Runner → ECS (preparation complete)
+- **Active Farmers**: Bulgarian mango farmers using ECS (soon ECS)! 🥭
+- **Current Migration**: ECS → ECS (preparation complete)

@@ -15,7 +15,7 @@ When receiving instructions, web-based Claude should:
 3. **Use Lettered Options** (preferred): When possible, provide multiple choice answers:
    - **Question 1:** Which deployment approach should we use?
      - **a)** ECS deployment with rolling updates
-     - **b)** App Runner deployment with instant scaling
+     - **b)** ECS deployment with instant scaling
      - **c)** Lambda-based serverless approach
 
 4. **Avoid Unnecessary Questions**: If the instruction is clear, proceed without inventing questions
@@ -31,6 +31,7 @@ When receiving instructions, web-based Claude should:
   - Database operations and API development
   - Testing and deployment verification
   - Git operations and version control
+  - **MANDATORY: Git commit & push for EVERY task**
 
 **FALLBACK: Human**
 - Only assign tasks to human when c.code genuinely cannot handle them
@@ -54,6 +55,8 @@ When receiving instructions, web-based Claude should:
 
 ## 📝 MANDATORY GIT PUSH REQUIREMENT
 
+**🚨 CRITICAL: EVERY task MUST end with git commit and push. NO EXCEPTIONS! 🚨**
+
 **EVERY Task Specification MUST include Git push commands in the implementation.**
 
 This is MANDATORY to ensure:
@@ -64,14 +67,24 @@ This is MANDATORY to ensure:
 
 **Standard Git Push Block (include in EVERY TS):**
 ```bash
-# After implementing all changes:
+# MANDATORY - Must be executed at the end of EVERY task:
 git add -A
 git commit -m "feat: [brief description of what was implemented]"
 git push origin main
 
+# MANDATORY VERSION TAG FORMAT: v[VERSION]-[feature-name]
+# Example: v3.5.5-deployment-verification-tools
+git tag v[VERSION]-[feature-name]
+git push origin v[VERSION]-[feature-name]
+
 # Verify deployment triggered:
 echo "Check GitHub Actions for deployment status"
 ```
+
+**🚨 CRITICAL REQUIREMENTS:**
+1. **Tasks are NOT complete until git push is executed!**
+2. **Version tags MUST follow format: v[VERSION]-[feature-name]**
+3. **Example: v3.5.5-deployment-verification-tools**
 
 ## Standard Abbreviations Vocabulary
 
@@ -88,7 +101,7 @@ echo "Check GitHub Actions for deployment status"
 
 *Both web-based Claude and Claude Code must recognize these abbreviations*
 
-## The 5-Step Recipe
+## The 7-Step Recipe
 
 1. **STATE THE GOAL** - One clear sentence
 2. **APPLY MANGO RULE** - Explain for Bulgarian mango farmer
@@ -96,6 +109,7 @@ echo "Check GitHub Actions for deployment status"
 4. **LIST REQUIREMENTS** - Specific, constitutional
 5. **PROVIDE CONTEXT** - Current state, integrations
 6. **GIVE IMPLEMENTATION GUIDANCE** - Concrete steps, specific approaches
+7. **GIT COMMIT & PUSH** - MANDATORY final step for EVERY task
 
 ## Specification Template (TS Format)
 
@@ -236,7 +250,7 @@ git push origin main
 - Provide concrete implementation steps
 - Be specific about technical approaches
 - Always think globally (MANGO RULE)
-- Include deployment version expectations
+- Include deployment version expectations (ECS takes 12-17 minutes - see BEST_PRACTICES.md)
 - MUST include diary update as success criteria
 - Check DATABASE_SCHEMA.md for current structure
 - Consider CAVA for any conversation/interaction features

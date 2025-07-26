@@ -15,14 +15,14 @@ Comprehensive cleanup of the shared folder removed 15 obsolete subdirectories an
 - **Criteria**: Newer files supersede older ones; current system architecture changes make older docs obsolete
 
 ### Major Changes
-1. **ECS Migration Impact**: System migrated from AWS App Runner to ECS on July 20, 2025
-2. **Architecture Obsolescence**: All App Runner documentation became outdated
+1. **ECS Migration Impact**: System migrated from AWS ECS to ECS on July 20, 2025
+2. **Architecture Obsolescence**: All ECS documentation became outdated
 3. **Temporary Reports**: Investigation reports from July 18-19 completed and no longer needed
 
 ## Findings
 
 ### Removed Obsolete Subdirectories (15 total):
-- `architecture/` - Contained App Runner docs, now uses ECS
+- `architecture/` - Contained ECS docs, now uses ECS
 - `docs/` - Superseded by essentials/ documentation  
 - `implementation/` - Old implementation files pre-ECS migration
 - `safety_systems/` - Old safety system implementations
@@ -59,7 +59,7 @@ Comprehensive cleanup of the shared folder removed 15 obsolete subdirectories an
 
 ## Validation
 ### Confirmed Obsolescence:
-1. **Architecture docs** referenced App Runner (now ECS)
+1. **Architecture docs** referenced ECS (now ECS)
 2. **Quick start guides** outdated vs. essentials/QUICK_START.md
 3. **Implementation files** pre-dated ECS migration  
 4. **Temporary reports** completed their investigation purpose

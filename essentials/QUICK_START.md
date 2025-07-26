@@ -9,7 +9,7 @@ Agricultural CRM for global farmers. WhatsApp interface, AI-powered intelligence
 - **Active Modules**: Core CRM, WhatsApp integration, LLM service
 - **Core Intelligence**: CAVA (Conversation Architecture for AVA) - Four-database system powering all farmer interactions
 
-## AWS Services Architecture (ECS ONLY - App Runner DELETED)
+## AWS Services Architecture (ECS ONLY - ECS DELETED)
 ### **ava-olo-agricultural-core** (ECS Service)
 - **Purpose**: Main farmer application (registration, chat, WhatsApp integration)
 - **Current Version**: v3.x.x series
@@ -42,6 +42,7 @@ Agricultural CRM for global farmers. WhatsApp interface, AI-powered intelligence
 - **Full Constitution**: [AVA_OLO_CONSTITUTION.md](AVA_OLO_CONSTITUTION.md)
 - **Write Specs**: [SPECIFICATION_GUIDELINES.md](SPECIFICATION_GUIDELINES.md)
 - **Implementation**: [IMPLEMENTATION_GUIDELINES.md](IMPLEMENTATION_GUIDELINES.md)
+- **Best Practices**: [BEST_PRACTICES.md](BEST_PRACTICES.md) *(Deployment timelines, troubleshooting, real-world scenarios)*
 - **System Changelog**: [SYSTEM_CHANGELOG.md](SYSTEM_CHANGELOG.md) *(ALL changes - deployments + refactoring)*
 - **CAVA Architecture**: [CAVA_TECHNICAL_SPECIFICATION.md](CAVA_TECHNICAL_SPECIFICATION.md)
 

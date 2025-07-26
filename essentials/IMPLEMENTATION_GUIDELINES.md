@@ -47,16 +47,31 @@ Every deployment MUST preserve:
 - Bulgarian mango farmer scenario functionality
 - No hardcoded country/crop limitations
 
+## 🚨 CRITICAL: Git Commit & Push MANDATORY
+
+**EVERY task MUST end with:**
+```bash
+git add -A
+git commit -m "feat: [description]"
+git push origin main
+
+# MANDATORY VERSION TAG: v[VERSION]-[feature-name]
+git tag v[VERSION]-[feature-name]  # Example: v3.5.5-deployment-verification-tools
+git push origin v[VERSION]-[feature-name]
+```
+
+**Tasks are INCOMPLETE without git push!**
+
 ## 🚨 CRITICAL: Version & Deployment Rules
 
 ### ⚠️ INFRASTRUCTURE MANDATE: ECS ONLY
-- **App Runner is OBSOLETE** - DO NOT deploy or reference App Runner
+- **ECS is OBSOLETE** - DO NOT deploy or reference ECS
 - **All deployments MUST use ECS** infrastructure only
 - **Production URL**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com
 - **Services**: ava-monitoring-task and ava-agricultural-task on ECS
 
 ### Every Deployment MUST:
-1. **Target ECS only** (App Runner is decommissioned)
+1. **Target ECS only** (ECS is decommissioned)
 2. **Run protection gate** (./pre_deployment_gate.sh MUST PASS)
 3. **Increment version** (MAJOR.MINOR.PATCH)
 4. **Deploy to ECS and verify** version matches
@@ -191,10 +206,87 @@ class SoilAnalysisModule:
 - Check DATABASE_SCHEMA.md for current structure
 - NEVER manually edit DATABASE_SCHEMA.md (auto-updated)
 
-### 5. Version Management Rules
+### 5. Report Storage Guidelines
+
+#### 📁 Report Organization Rules
+All reports MUST be stored in the centralized location with proper naming:
+
+**Mandatory Structure:**
+```
+/ava-olo-shared/essentials/reports/YYYY-MM-DD/report_XXX_description.md
+```
+
+**Examples:**
+- `/reports/2025-07-26/report_001_aws_aurora_verification.md`
+- `/reports/2025-07-26/report_002_database_analysis.md`
+- `/reports/2025-07-26/report_003_deployment_success.md`
+
+**Rules:**
+- 📅 **Date Folder**: Always use `YYYY-MM-DD` format
+- 🔢 **Sequential Numbering**: Use `report_XXX` with zero-padded numbers
+- 📝 **Descriptive Names**: Clear, lowercase, underscore-separated descriptions
+- 🚫 **No Root Reports**: Never store reports in module root directories
+- 📚 **Index Update**: Update `/reports/README.md` when adding new reports
+
+**Bulgarian Mango Test for Reports:** 
+"Can a Bulgarian mango farmer easily find and understand this report's purpose from its filename and location?"
+
+### 6. Version Naming Standards
+
+#### 🏷️ Git Tag Format (MANDATORY)
+All git tags MUST follow this format:
+```
+v[VERSION]-[description]
+```
+
+**Examples:**
+- ✅ `v3.2.0-schema-button-aurora`
+- ✅ `v2.5.4-db-fixed`
+- ✅ `v3.3.0-schema-viewer`
+- ❌ `backup-20250717-210831` (no version prefix)
+- ❌ `pre-web-interface-v1.0` (version not at start)
+
+**Rules:**
+- 🔢 **Version First**: Always start with `v` followed by semantic version
+- 📝 **Descriptive Suffix**: Brief description after hyphen
+- 🚫 **No Spaces**: Use hyphens for separation
+- 📊 **Semantic Versioning**: Major.Minor.Patch format
+
+### 7. Changelog Maintenance Rules
+
+#### 📋 SYSTEM_CHANGELOG.md Updates (MANDATORY)
+Every deployment MUST have a changelog entry with:
+
+**Required Format:**
+```markdown
+## [YYYY-MM-DD] Feature Description - v[VERSION]
+**Status**: DEPLOYED ✅ / READY FOR DEPLOYMENT ✅
+**Service**: [Service-name] (ECS)
+**Version**: v[VERSION]
+**Feature**: [Brief Description]
+
+**Changes**:
+- 📊 **Feature 1**: Description
+- 🔧 **Feature 2**: Description
+
+**Technical Updates**:
+- File changes
+- New endpoints
+- Configuration updates
+```
+
+**Rules:**
+- 📅 **Timestamp**: Include both UTC and CET when possible
+- ✅ **Status**: Clear deployment status indicator  
+- 🏷️ **Version Match**: Version must match git tag exactly
+- 📝 **Complete**: Never leave "TODO" or incomplete entries
+
+### 8. Version Management Rules
 
 #### ❌ NO HARDCODING OF VERSIONS - EVER!
 **Problem**: Hardcoded versions cause deployments to always show the same version, breaking version tracking and deployment verification.
+
+**📚 See [BEST_PRACTICES.md](./BEST_PRACTICES.md) for complete deployment guidelines and real-world scenarios**
 
 **Examples of what NOT to do:**
 ```python
@@ -252,7 +344,7 @@ def test_mango_rule():
 - [ ] Module independent
 - [ ] Privacy maintained
 - [ ] Run deployment verification script (creates manifest)
-- [ ] Deployed to ECS (App Runner is OBSOLETE)
+- [ ] Deployed to ECS (ECS is OBSOLETE)
 - [ ] Version endpoint verified on ALB
 - [ ] Deployment integrity checked (/api/deployment/verify)
 - [ ] Visual health confirmed (/api/deployment/health shows GREEN)

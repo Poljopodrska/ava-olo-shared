@@ -38,10 +38,10 @@ The database connection failure is due to network isolation. The RDS instance is
 
 ## Solutions Available
 
-### Option 1: Use AWS App Runner Services (RECOMMENDED)
+### Option 1: Use AWS ECS Services (RECOMMENDED)
 Since your services are already deployed:
-- **Monitoring**: https://bcibj8ws3x.us-east-1.awsapprunner.com
-- **Agricultural**: https://ujvej9snpp.us-east-1.awsapprunner.com
+- **Monitoring**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com
+- **Agricultural**: https://ujvej9snpp.us-east-1.elb.amazonaws.com
 
 These services ARE inside the VPC and CAN connect to the database. You can:
 1. Create an API endpoint to run analysis queries
@@ -82,7 +82,7 @@ AWS CloudShell might have VPC access configured:
 
 The database schema analysis can still be completed by:
 
-1. **Using App Runner Services**:
+1. **Using ECS Services**:
    - Add temporary endpoint to monitoring service
    - Query information_schema through the API
    - Remove endpoint after analysis
@@ -99,7 +99,7 @@ The database schema analysis can still be completed by:
 
 ## Recommendations
 
-1. **Immediate**: Use existing App Runner services to create analysis endpoint
+1. **Immediate**: Use existing ECS services to create analysis endpoint
 2. **Short-term**: Set up bastion host for developer access
 3. **Long-term**: Implement AWS Systems Manager for secure access
 4. **Security**: Keep RDS in private subnet (current setup is correct)

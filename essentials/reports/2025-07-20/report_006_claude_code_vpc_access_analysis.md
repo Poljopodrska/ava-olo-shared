@@ -63,10 +63,10 @@ Location: User's local development machine
 ## Available Solutions
 
 ### 1. API Gateway Pattern (RECOMMENDED)
-Create secure API endpoints in App Runner services:
+Create secure API endpoints in ECS services:
 
 ```python
-# In App Runner service
+# In ECS service
 @app.route('/api/db/query', methods=['POST'])
 @require_api_key
 def db_query():
@@ -146,7 +146,7 @@ These are **architecturally impossible** because Claude Code runs on the user's 
 
 ### Immediate (Today)
 ```python
-# Add to monitoring service (App Runner)
+# Add to monitoring service (ECS)
 @app.route('/api/admin/db/schema', methods=['GET'])
 @require_admin_auth
 def get_schema():
@@ -169,7 +169,7 @@ def get_schema():
 
 Claude Code cannot have direct VPC access because it runs on the user's local machine, not within AWS infrastructure. The request is similar to asking "make my laptop part of the AWS VPC" - it's not how cloud networking works.
 
-The practical solution is to use the existing App Runner services as API gateways to the database, maintaining security while providing necessary access.
+The practical solution is to use the existing ECS services as API gateways to the database, maintaining security while providing necessary access.
 
 ## Mango Test Result
 ❌ **FAILED**: "Claude Code can directly query farmer database from within VPC"

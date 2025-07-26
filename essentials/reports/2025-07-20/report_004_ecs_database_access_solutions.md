@@ -5,11 +5,11 @@
 **Related Services**: ECS Tasks and RDS Access
 
 ## Executive Summary
-With App Runner being decommissioned and ECS now in production, we need alternative methods to access the private RDS database for analysis and maintenance. This report provides practical solutions for the ECS architecture.
+With ECS being decommissioned and ECS now in production, we need alternative methods to access the private RDS database for analysis and maintenance. This report provides practical solutions for the ECS architecture.
 
 ## Current Infrastructure Status
 - **Production**: ECS (http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com)
-- **App Runner**: To be decommissioned (temporary backup)
+- **ECS**: To be decommissioned (temporary backup)
 - **RDS**: Private subnet (172.31.0.55)
 - **ECS Tasks**: ava-monitoring-task:5, ava-agricultural-task:4
 
@@ -178,7 +178,7 @@ ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
 
 1. Use RDS Query Editor for immediate analysis
 2. Update IMPLEMENTATION_GUIDELINES.md with ECS access methods
-3. Remove App Runner references from documentation
+3. Remove ECS references from documentation
 4. Setup ECS Exec for future access
 
-The transition from App Runner to ECS actually provides MORE flexibility for database access through ECS Exec and task-based administration.
+The transition from ECS to ECS actually provides MORE flexibility for database access through ECS Exec and task-based administration.
