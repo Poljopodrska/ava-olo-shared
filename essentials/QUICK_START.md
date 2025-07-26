@@ -9,18 +9,20 @@ Agricultural CRM for global farmers. WhatsApp interface, AI-powered intelligence
 - **Active Modules**: Core CRM, WhatsApp integration, LLM service
 - **Core Intelligence**: CAVA (Conversation Architecture for AVA) - Four-database system powering all farmer interactions
 
-## AWS Services Architecture
-### **ava-olo-agricultural-core-fresh**
+## AWS Services Architecture (ECS ONLY - App Runner DELETED)
+### **ava-olo-agricultural-core** (ECS Service)
 - **Purpose**: Main farmer application (registration, chat, WhatsApp integration)
 - **Current Version**: v3.x.x series
 - **Features**: CAVA-powered registration, agricultural chat, farmer authentication
-- **URL**: https://ujvej9snpp.us-east-1.awsapprunner.com
+- **URL**: http://ava-olo-farmers-alb-82735690.us-east-1.elb.amazonaws.com
+- **Infrastructure**: ECS on ava-olo-production cluster
 
-### **ava-olo-monitoring-dashboards-fresh**
+### **ava-olo-monitoring-dashboards** (ECS Service)
 - **Purpose**: Business intelligence and monitoring dashboards
 - **Current Version**: v2.x.x series  
 - **Features**: Farmer statistics, field metrics, performance monitoring, database health
-- **URL**: https://bcibj8ws3x.us-east-1.awsapprunner.com
+- **URL**: http://ava-olo-alb-65365776.us-east-1.elb.amazonaws.com
+- **Infrastructure**: ECS on ava-olo-production cluster
 
 ## The MANGO RULE 🥭
 **Supreme Test**: "Would this work for a Bulgarian mango farmer?"
