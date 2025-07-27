@@ -5,10 +5,29 @@ THIS IS THE ONLY PLACE FOR ENVIRONMENT VARIABLES - NO EXCEPTIONS!
 
 All services MUST import from this module for environment variables.
 No hardcoding allowed anywhere else in the codebase.
+
+🔒 AWS-ONLY ENFORCEMENT: All sensitive variables MUST come from AWS ECS
 """
 import os
 from typing import Optional, Dict, Any
 import logging
+
+# Import AWS enforcement (will run checks on import)
+try:
+    import sys
+    sys.path.append('/mnt/c/Users/HP/ava-olo-constitutional/ava-olo-agricultural-core')
+    from modules.core.aws_env_enforcement import AWSEnvironmentEnforcer
+    
+    # Enforce AWS-only on import
+    AWSEnvironmentEnforcer.enforce_aws_only()
+    print("✅ AWS-only environment enforcement active")
+except ImportError:
+    print("⚠️  AWS enforcement module not found - protection reduced")
+except SystemExit:
+    # Re-raise if AWS enforcement blocks execution
+    raise
+except Exception as e:
+    print(f"⚠️  AWS enforcement error: {e}")
 
 logger = logging.getLogger(__name__)
 
@@ -16,20 +35,20 @@ class CentralConfig:
     """Single source of truth for ALL environment variables"""
     
     # ========== DATABASE CONFIGURATION ==========
-    # These are used by both services
+    # 🔒 CRITICAL: DB_PASSWORD MUST come from AWS ECS (no defaults for security)
     DB_HOST = os.getenv('DB_HOST', 'farmer-crm-production.cifgmm0mqg5q.us-east-1.rds.amazonaws.com')
     DB_NAME = os.getenv('DB_NAME', 'farmer_crm')
     DB_USER = os.getenv('DB_USER', 'postgres')
-    DB_PASSWORD = os.getenv('DB_PASSWORD')  # From AWS Secrets Manager
+    DB_PASSWORD = os.getenv('DB_PASSWORD')  # 🔒 AWS ONLY - NO DEFAULT
     DB_PORT = os.getenv('DB_PORT', '5432')
     
     # ========== API KEYS ==========
-    # IMPORTANT: These ARE set in AWS ECS task definitions!
-    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  # We have this in AWS!
-    OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')  # Weather service
-    GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')  # For field drawing
-    PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')  # External search
-    TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')  # WhatsApp integration
+    # 🔒 CRITICAL: ALL API keys MUST come from AWS ECS (no defaults for security)
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  # 🔒 AWS ONLY - NO DEFAULT
+    OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')  # 🔒 AWS ONLY - NO DEFAULT
+    GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')  # 🔒 AWS ONLY - NO DEFAULT
+    PERPLEXITY_API_KEY = os.getenv('PERPLEXITY_API_KEY')  # 🔒 AWS ONLY - NO DEFAULT
+    TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')  # 🔒 AWS ONLY - NO DEFAULT
     
     # ========== AWS CONFIGURATION ==========
     AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
@@ -82,7 +101,7 @@ class CentralConfig:
         """Ensure all required environment variables are present"""
         missing = []
         
-        # Critical keys that MUST be present
+        # Critical keys that MUST be present (AWS-only)
         required_keys = {
             'DB_PASSWORD': cls.DB_PASSWORD,
             'OPENAI_API_KEY': cls.OPENAI_API_KEY,
@@ -98,7 +117,7 @@ class CentralConfig:
         # Check required keys
         for key_name, key_value in required_keys.items():
             if not key_value:
-                missing.append(f"{key_name} (REQUIRED)")
+                missing.append(f"{key_name} (REQUIRED - AWS ECS ONLY)")
         
         # Check important keys and warn if missing
         for key_name, key_value in important_keys.items():
@@ -106,12 +125,36 @@ class CentralConfig:
                 logger.warning(f"{key_name} not set - some features may not work")
         
         if missing:
-            logger.error(f"⚠️ Missing required environment variables: {missing}")
-            logger.info("BUT these ARE set in AWS ECS task definition!")
-            logger.info("Check: 1) Import from CentralConfig, 2) ECS deployment")
+            logger.error(f"🔒 Missing AWS environment variables: {missing}")
+            logger.info("ALL secrets MUST be in AWS ECS task definition!")
+            logger.info("🚫 .env files are FORBIDDEN - use AWS only")
             logger.info("AWS CLI check: aws ecs describe-task-definition --task-definition <your-task>")
         
         return len(missing) == 0, missing
+    
+    @classmethod
+    def validate_aws_only_enforcement(cls):
+        """Validate AWS-only enforcement is active"""
+        try:
+            # Check if AWS enforcement is available
+            from modules.core.aws_env_enforcement import AWSEnvironmentEnforcer
+            
+            # Run comprehensive security check
+            status = AWSEnvironmentEnforcer.get_environment_security_status()
+            
+            if status["security_level"] == "CRITICAL_VIOLATION":
+                logger.error("🚨 CRITICAL: .env files detected - FORBIDDEN!")
+                raise EnvironmentError("AWS-only enforcement violated")
+            
+            if status["security_level"] == "AWS_MISCONFIGURED":
+                logger.error("🔒 AWS environment misconfigured - missing critical variables")
+                raise EnvironmentError("AWS environment misconfigured")
+            
+            return status
+            
+        except ImportError:
+            logger.warning("⚠️  AWS enforcement module not available")
+            return {"security_level": "UNKNOWN", "enforcement_active": False}
     
     @classmethod
     def debug_environment(cls):
