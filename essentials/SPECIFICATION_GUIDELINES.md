@@ -53,11 +53,10 @@ When receiving instructions, web-based Claude should:
 
 ---
 
-## 📝 MANDATORY GIT PUSH REQUIREMENT
-
-**🚨 CRITICAL: EVERY task MUST end with git commit and push. NO EXCEPTIONS! 🚨**
+## 📝 MANDATORY GIT PUSH REQUIREMENT (UPDATED!)
 
 **EVERY Task Specification MUST include Git push commands in the implementation.**
+**This is NOW AUTOMATIC - no need to specify unless you want NO git push.**
 
 This is MANDATORY to ensure:
 - All changes are deployed automatically via GitHub Actions
@@ -65,26 +64,30 @@ This is MANDATORY to ensure:
 - Bulgarian mango farmers get updates immediately
 - All deployments are traceable to Git commits
 
-**Standard Git Push Block (include in EVERY TS):**
+### Standard Ending (Automatically Included):
 ```bash
-# MANDATORY - Must be executed at the end of EVERY task:
+MANDATORY - Git Push & Deploy:
+```bash
+# After implementing all changes:
 git add -A
-git commit -m "feat: [brief description of what was implemented]"
+git commit -m "vX.X.X - [brief description]"
 git push origin main
 
-# MANDATORY VERSION TAG FORMAT: v[VERSION]-[feature-name]
-# Example: v3.5.5-deployment-verification-tools
-git tag v[VERSION]-[feature-name]
-git push origin v[VERSION]-[feature-name]
-
 # Verify deployment triggered:
-echo "Check GitHub Actions for deployment status"
+# Check GitHub Actions for deployment status
+```
+```
+
+### Exception Cases:
+If you DON'T want git push (rare), explicitly state:
+```
+NO GIT PUSH: This task is local only / preparation only / etc.
 ```
 
 **🚨 CRITICAL REQUIREMENTS:**
-1. **Tasks are NOT complete until git push is executed!**
-2. **Version tags MUST follow format: v[VERSION]-[feature-name]**
-3. **Example: v3.5.5-deployment-verification-tools**
+1. **Git push is AUTOMATIC in every TS - no need to ask for it**
+2. **Only mention if you DON'T want it (rare exceptions)**
+3. **Default behavior = always push to deploy**
 
 ## Standard Abbreviations Vocabulary
 
@@ -99,7 +102,46 @@ echo "Check GitHub Actions for deployment status"
 - The CLI-based coding assistant with absolute task priority
 - Example: "CC should handle this TypeScript development task"
 
-*Both web-based Claude and Claude Code must recognize these abbreviations*
+**PTP** = **PETER'S TASKS PROTOCOL** (NEW!)
+- Sequential human tasks with report-back structure
+- Format: Task 1 → Peter reports → Task 2 → Peter reports → etc.
+- Used when human needs to perform actions (registrations, manual setups)
+- Example: "Let's use PTP for the AWS setup process"
+
+*All abbreviations must be recognized by both web-based Claude and Claude Code*
+
+## PTP (Peter's Tasks Protocol) Template
+
+When human tasks are needed, use PTP format:
+
+```
+PTP - PETER'S TASKS PROTOCOL
+OBJECTIVE: [What needs to be accomplished]
+TOTAL TASKS: [Number]
+
+TASK 1: [First task name]
+- [ ] Step 1 details
+- [ ] Step 2 details
+- [ ] Expected outcome
+REPORT BACK: [What to confirm when done]
+
+WAIT FOR: "Task 1 complete" confirmation
+
+TASK 2: [Second task name]
+- [ ] Step 1 details
+- [ ] Step 2 details
+- [ ] Expected outcome
+REPORT BACK: [What to confirm when done]
+
+WAIT FOR: "Task 2 complete" confirmation
+
+[Continue for all tasks...]
+
+COMPLETION VERIFICATION:
+- [ ] All tasks reported complete
+- [ ] System functioning as expected
+- [ ] Documentation updated
+```
 
 ## The 7-Step Recipe
 
