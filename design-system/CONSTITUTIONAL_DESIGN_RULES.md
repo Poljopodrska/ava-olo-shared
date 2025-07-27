@@ -144,6 +144,13 @@ box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 - Natural imagery with proper contrast
 - Professional yet approachable tone
 
+### 11. URL Permanence (Constitutional Amendment #16)
+- Feature URLs are permanent contracts - NEVER change after deployment
+- URL structure must be carefully planned before first deployment
+- Use semantic, descriptive URL patterns from day one
+- No URL refactoring, renaming, or restructuring allowed
+- URL changes require constitutional exception process
+
 ## Implementation Checklist
 - [ ] Logo implemented (SVG format)
 - [ ] Color variables defined
@@ -154,6 +161,7 @@ box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 - [ ] Version display
 - [ ] Accessibility tested
 - [ ] Brand consistency verified
+- [ ] URL structure finalized and permanent
 
 ## Mango Test
 "A Bulgarian mango farmer instantly recognizes AVA OLO's professional agricultural brand across all touchpoints."

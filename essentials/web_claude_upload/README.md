@@ -17,6 +17,7 @@ Upload these 10 essential files when starting a new chat session:
 8. **MANGO_RULE_CLARIFICATION.md** - Universal thinking (Bulgarian mango farmer)
 9. **ENVIRONMENT_VARIABLES.md** - Complete environment variables guide
 10. **GIT_PUSH_STANDARD.md** - Standardized deployment procedures
+11. **AVA_INTELLIGENCE_ARCHITECTURE.md** - 4-pillar intelligence system (CAVA, AGAVA, FAVA, LAVA)
 
 ## Upload Order
 
@@ -31,6 +32,7 @@ Upload these 10 essential files when starting a new chat session:
 - **Deployment issues**: Add **GIT_PUSH_STANDARD.md**
 - **CAVA/Chat features**: Add **CAVA_TECHNICAL_SPECIFICATION.md**
 - **Database work**: Add **DATABASE_SCHEMA.md**
+- **Architecture planning**: Add **AVA_INTELLIGENCE_ARCHITECTURE.md**
 
 ## Quick Copy Command
 

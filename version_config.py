@@ -11,7 +11,7 @@ class VersionManager:
     
     # Version should be set as environment variable or in deployment
     # NEVER hardcode versions in individual services
-    CURRENT_VERSION = "3.5.0"  # This will be the deployed version
+    CURRENT_VERSION = "3.5.24"  # This will be the deployed version
     
     @staticmethod
     def get_current_version() -> str:

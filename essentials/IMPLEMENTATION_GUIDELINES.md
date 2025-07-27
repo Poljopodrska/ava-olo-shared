@@ -47,6 +47,13 @@ Every deployment MUST preserve:
 - Bulgarian mango farmer scenario functionality
 - No hardcoded country/crop limitations
 
+#### URL Permanence Protection 🔗
+Constitutional Amendment #16 enforcement:
+- URLs MUST NEVER change after deployment
+- Feature URLs are permanent contracts
+- URL structure validation before deployment
+- Deployment blocked if URL changes detected
+
 ## 🚨 CRITICAL: Git Commit & Push MANDATORY
 
 **EVERY task MUST end with:**

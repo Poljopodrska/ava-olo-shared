@@ -207,6 +207,104 @@ A successful deployment means:
 - ✅ Database connections stable
 - ✅ No constitutional violations
 
+## 🆘 TROUBLESHOOTING
+
+### Common Deployment Issues
+
+#### ECS Tasks Failing to Start
+If ECS tasks fail to start immediately after deployment:
+
+1. **Check CloudWatch Logs**:
+   ```bash
+   aws logs describe-log-streams --log-group-name /ecs/ava-agricultural --order-by LastEventTime --descending --limit 5
+   ```
+
+2. **Look for Secrets Manager Errors**:
+   Common error pattern:
+   ```
+   ResourceInitializationError: unable to pull secrets or registry auth: 
+   execution resource retrieval failed: unable to retrieve secret from asm: 
+   AccessDeniedException: User: arn:aws:sts::127679825789:assumed-role/ecsTaskExecutionRole/[task] 
+   is not authorized to perform: secretsmanager:GetSecretValue
+   ```
+
+#### IAM Permission Issues (CRITICAL)
+If you see `AccessDeniedException` for secrets:
+
+1. **Verify IAM Policies Attached**:
+   ```bash
+   aws iam list-attached-role-policies --role-name ecsTaskExecutionRole
+   ```
+   
+   Should show:
+   - `AmazonECSTaskExecutionRolePolicy`
+   - `AVA-OLO-SecretsManagerAccess`
+
+2. **If Missing AVA-OLO-SecretsManagerAccess**:
+   ```bash
+   # Check if policy exists
+   aws iam get-policy --policy-arn arn:aws:iam::127679825789:policy/AVA-OLO-SecretsManagerAccess
+   
+   # If exists, attach to role
+   aws iam attach-role-policy --role-name ecsTaskExecutionRole --policy-arn arn:aws:iam::127679825789:policy/AVA-OLO-SecretsManagerAccess
+   
+   # Force new deployment
+   aws ecs update-service --cluster ava-olo-production --service agricultural-core --force-new-deployment
+   ```
+
+3. **If Policy Doesn't Exist**:
+   See `AWS_IAM_REQUIREMENTS.md` for complete setup instructions.
+
+#### Service Health Check Failures
+1. **Check ALB Target Groups**:
+   ```bash
+   aws elbv2 describe-target-health --target-group-arn arn:aws:elasticloadbalancing:us-east-1:127679825789:targetgroup/ava-farmers-tg/d1394d67a8492b35
+   ```
+
+2. **Verify Health Endpoint**:
+   ```bash
+   curl -v http://ava-olo-farmers-alb-82735690.us-east-1.elb.amazonaws.com/health
+   ```
+
+#### Database Connection Issues
+1. **Test Database Connectivity**:
+   ```bash
+   # From ECS task or local environment with same credentials
+   psql -h farmer-crm-production.cifgmm0mqg5q.us-east-1.rds.amazonaws.com -U [username] -d postgres
+   ```
+
+2. **Check Security Groups**:
+   Ensure ECS security group can access RDS on port 5432.
+
+#### Version Not Updating
+1. **Check ECR Image Tags**:
+   ```bash
+   aws ecr describe-images --repository-name ava-olo-agricultural-core --region us-east-1
+   ```
+
+2. **Verify Task Definition**:
+   ```bash
+   aws ecs describe-task-definition --task-definition ava-agricultural-task:latest
+   ```
+
+### Emergency Recovery
+For critical service outages:
+
+1. **Immediate Actions**:
+   - Check CloudWatch logs first
+   - Verify IAM permissions (most common cause)
+   - Check ECS service events
+   - Test health endpoints
+
+2. **Historic Issues Resolved**:
+   - **2025-07-27**: IAM permissions for Secrets Manager (17+ failed deployments)
+   - See `SYSTEM_CHANGELOG.md` for complete incident history
+
+3. **Documentation References**:
+   - `AWS_IAM_REQUIREMENTS.md` - Complete IAM setup
+   - `SYSTEM_CHANGELOG.md` - Full deployment history
+   - `DEPLOYMENT_STATUS_*.md` - Current service status
+
 ---
 
 **NO OTHER METHOD IS ALLOWED!**

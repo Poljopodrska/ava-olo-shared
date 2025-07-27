@@ -117,6 +117,15 @@ See `/essentials/MANGO_RULE_CLARIFICATION.md` for full explanation.
 - Revolutionary zero-code approach for agricultural conversations
 - CAVA's four-database architecture (Neo4j, Pinecone, Redis, PostgreSQL) powers all farmer interactions
 
+### 🔗 AMENDMENT #16 - URL PERMANENCE PRINCIPLE
+- Once a feature is deployed with a web address, that URL MUST NEVER CHANGE
+- Feature URLs become permanent contracts with users
+- URL stability is mandatory as long as the feature exists
+- No URL refactoring, renaming, or restructuring after deployment
+- Breaking URL changes violate user trust and accessibility
+- URL permanence enforced at constitutional level with deployment blocks
+- Philosophy: "URLs are promises - never break promises"
+
 ## CONSTITUTIONAL COMPLIANCE CHECK
 Before ANY development work:
 1. Read this constitution completely
