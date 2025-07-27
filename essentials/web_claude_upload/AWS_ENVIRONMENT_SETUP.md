@@ -24,7 +24,7 @@ This guide shows how to properly configure environment variables in AWS ECS task
 DB_PASSWORD=your_production_db_password
 
 # API Keys
-OPENAI_API_KEY=sk-your_openai_key
+OPENAI_API_KEY=your_openai_api_key_here
 OPENWEATHER_API_KEY=your_weather_api_key
 GOOGLE_MAPS_API_KEY=your_google_maps_key
 PERPLEXITY_API_KEY=your_perplexity_key
@@ -89,7 +89,7 @@ aws ecs register-task-definition \
         {"name": "DB_NAME", "value": "farmer_crm"},
         {"name": "DB_USER", "value": "postgres"},
         {"name": "DB_PASSWORD", "value": "YOUR_SECURE_DB_PASSWORD"},
-        {"name": "OPENAI_API_KEY", "value": "sk-YOUR_OPENAI_KEY"},
+        {"name": "OPENAI_API_KEY", "value": "YOUR_OPENAI_API_KEY_HERE"},
         {"name": "OPENWEATHER_API_KEY", "value": "YOUR_WEATHER_KEY"},
         {"name": "GOOGLE_MAPS_API_KEY", "value": "YOUR_GOOGLE_KEY"},
         {"name": "APP_VERSION", "value": "3.5.5"},
@@ -117,7 +117,7 @@ aws ecs register-task-definition \
 4. Scroll to **Container Definitions** → **Environment**
 5. Add each environment variable:
    - **Key**: `DB_PASSWORD` **Value**: `your_secure_password`
-   - **Key**: `OPENAI_API_KEY` **Value**: `sk-your_key`
+   - **Key**: `OPENAI_API_KEY` **Value**: `your_openai_key_here`
    - (Continue for all required variables)
 6. Click **Update** then **Create**
 
@@ -133,7 +133,7 @@ aws secretsmanager create-secret \
 aws secretsmanager create-secret \
   --name "ava-olo/production/openai" \
   --description "OpenAI API key for AVA OLO" \
-  --secret-string '{"api_key":"sk-your_openai_key"}'
+  --secret-string '{"api_key":"your_openai_key_here"}'
 ```
 
 Then reference in task definition:
@@ -208,21 +208,21 @@ aws logs get-log-events \
 ```bash
 # This is BLOCKED by our protection system
 echo "DB_PASSWORD=secret123" > .env
-echo "OPENAI_API_KEY=sk-123" >> .env
+echo "OPENAI_API_KEY=your_key_here" >> .env
 ```
 
 ### ❌ FORBIDDEN: Hardcoded secrets in code
 ```python
 # This will be detected and blocked
-OPENAI_API_KEY = "sk-hardcoded_key_123"
-DB_PASSWORD = "hardcoded_password"
+OPENAI_API_KEY = "hardcoded_key_example"
+DB_PASSWORD = "hardcoded_password_example"
 ```
 
 ### ❌ FORBIDDEN: Environment variables in Docker
 ```dockerfile
 # This bypasses AWS-only enforcement
-ENV OPENAI_API_KEY=sk-123
-ENV DB_PASSWORD=secret
+ENV OPENAI_API_KEY=your_key_here
+ENV DB_PASSWORD=your_password_here
 ```
 
 ---
@@ -242,7 +242,7 @@ db_password = CentralConfig.DB_PASSWORD
 ```json
 {
   "environment": [
-    {"name": "OPENAI_API_KEY", "value": "sk-your_key_from_aws"}
+    {"name": "OPENAI_API_KEY", "value": "your_key_from_aws_here"}
   ]
 }
 ```
