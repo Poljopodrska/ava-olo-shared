@@ -1,6 +1,16 @@
 # 🚀 AVA OLO Standard Git Push Procedure
 *Ensuring Bulgarian mango farmer's code reaches production consistently*
 
+## 🔴 CRITICAL REQUIREMENT: VERSION NUMBERING 🔴
+
+**ALL commits MUST include a version number in the format: `vX.X.X - Description`**
+
+Examples:
+- ✅ `v3.5.0 - Add farmer registration validation`
+- ✅ `v3.5.1 - Fix database connection timeout issue`
+- ❌ `Fix database bug` (NO VERSION = REJECTED)
+- ❌ `3.5.1 - Add feature` (MISSING 'v' = REJECTED)
+
 ## ✅ ALWAYS Use This Method
 
 ### Quick Push (Recommended)

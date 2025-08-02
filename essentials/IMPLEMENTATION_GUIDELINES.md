@@ -7,6 +7,13 @@
 - These are formal specifications following the template in SPECIFICATION_GUIDELINES.md
 - Immediately recognize "TS" as a signal to expect implementation requirements
 
+## 📝 MANDATORY COMMIT STANDARDS
+
+### 🔴 EVERY COMMIT MUST INCLUDE VERSION NUMBER
+- Format: `vX.X.X - Description`
+- See [COMMIT_MESSAGE_STANDARD.md](./COMMIT_MESSAGE_STANDARD.md) for full details
+- Git hooks will REJECT commits without proper format
+
 ## 🛡️ MANDATORY DEPLOYMENT PROTECTION
 
 ### ⚠️ ZERO TOLERANCE FOR REGRESSION

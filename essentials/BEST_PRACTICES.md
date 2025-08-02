@@ -555,12 +555,32 @@ def create_farmer(data):
 
 ## 🌿 Git Workflow Best Practices
 
+### 🔴 MANDATORY VERSION NUMBERING 🔴
+
+**CRITICAL: Every commit MUST start with a version number in format `vX.X.X`**
+
+```bash
+# ✅ CORRECT - Version number included:
+git commit -m "v3.5.2 - Fix database connection pooling issue"
+git commit -m "v3.6.0 - Add natural language query feature"
+
+# ❌ WRONG - No version number:
+git commit -m "Fix database bug"
+git commit -m "feat: add new feature"
+
+# ❌ WRONG - Incorrect format:
+git commit -m "3.5.2 - Missing v prefix"
+git commit -m "version 3.5.2 - Wrong format"
+```
+
+**Git hooks are configured to REJECT commits without proper version format!**
+
 ### 📝 Commit Message Format
 
-#### Standard Format
+#### Standard Format (AFTER version number)
 ```bash
-# ✅ BEST PRACTICE: Use conventional commits
-git commit -m "feat: add database schema button with Aurora verification
+# ✅ BEST PRACTICE: Version + descriptive message
+git commit -m "v3.5.2 - feat: add database schema button with Aurora verification
 
 - Added Get Database Schema button to monitoring dashboard
 - Implemented Aurora connection verification across all dashboards
