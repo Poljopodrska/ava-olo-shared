@@ -14,6 +14,42 @@
 - See [COMMIT_MESSAGE_STANDARD.md](./COMMIT_MESSAGE_STANDARD.md) for full details
 - Git hooks will REJECT commits without proper format
 
+## 🚨 CRITICAL: INDIVIDUAL TASK DEPLOYMENT RULE
+
+### ⚠️ DEPLOY EACH TASK SEPARATELY - NO EXCEPTIONS
+When multiple tasks are given, EACH task MUST be:
+1. **Implemented individually**
+2. **Deployed to production**
+3. **Verified as working**
+4. **ONLY THEN** proceed to next task
+
+#### Why This Is MANDATORY
+- **Prevents cascading failures** - One broken feature doesn't take down everything
+- **Easy debugging** - Know exactly which change caused issues
+- **Fast rollback** - Can revert to last working version instantly
+- **Production stability** - Users always have working system
+
+#### Example Workflow
+```
+User gives 19 tasks → DO NOT implement all 19 at once!
+
+✅ CORRECT:
+Task 1: Deploy → Verify working → ✓
+Task 2: Deploy → Verify working → ✓  
+Task 3: Deploy → Verify working → ✓
+...continue one by one...
+
+❌ WRONG:
+Tasks 1-19: Implement all → Deploy all → FAILS → Cannot identify issue
+```
+
+#### Real-World Example (from v4.7.9 failure)
+- **Given**: 19 tasks for agricultural-core
+- **Mistake**: Implemented all 19 tasks, deployed together
+- **Result**: Container exited immediately, took 2+ hours to fix
+- **Root cause**: Missing weather_routes.py - would have been caught if deployed incrementally
+- **Lesson**: ALWAYS deploy one task at a time
+
 ## 🛡️ MANDATORY DEPLOYMENT PROTECTION
 
 ### ⚠️ ZERO TOLERANCE FOR REGRESSION
