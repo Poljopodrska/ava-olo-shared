@@ -44,6 +44,108 @@
 
 ---
 
+## 2025-01-06 - Dynamic Location System for Weather [🔧 REFACTORING]
+
+**Version**: v4.14.0
+**Services**: Agricultural Core
+**Status**: Development
+**Developer**: Claude Code
+
+### Changes Made:
+1. **Database Schema Updates**:
+   - Added migration for location columns: house_number, country, location_prompt_shown, location_updated_at
+   - Extended existing address columns (street_address, postal_code, city, weather_latitude, weather_longitude)
+
+2. **Weather Service Improvements**:
+   - Removed hardcoded Ljubljana location from weather service
+   - Weather service now requires explicit lat/lon coordinates
+   - Returns null when no location provided instead of defaulting
+
+3. **Location Collection System**:
+   - Created modal popup for first-time farmer dashboard visitors
+   - Auto-detects country from WhatsApp phone number prefix
+   - Collects: street address, house number, postal code, city
+   - Country field pre-populated and read-only
+
+4. **API Endpoints**:
+   - `/farmer/check-location` - Check if farmer has location data
+   - `/farmer/update-location` - Save farmer's location information
+
+5. **Phone Country Detection**:
+   - New utility module: `modules/utils/phone_country_detector.py`
+   - Supports 70+ country codes
+   - Automatic country detection from WhatsApp number
+
+### Files Modified:
+- `modules/weather/service.py` - Removed hardcoded location
+- `modules/api/farmer_dashboard_routes.py` - Added location endpoints
+- `templates/farmer/dashboard_v2.html` - Added location modal
+- `migrations/add_location_details_to_farmers.py` - New migration
+
+### Next Steps:
+- Integrate geocoding service for lat/lon from address
+- Update weather routes to use farmer's stored location
+- Add location edit functionality in settings
+
+---
+
+## 2025-08-02 - Complete Authentication System Fix [🚀 DEPLOYMENT]
+
+**Deployed to Production**: PENDING
+**Services**: Agricultural Core v3.6.0, Monitoring Dashboards v2.7.0
+**Type**: Feature Fix & Enhancement
+**GitHub Actions**: Deployment pending
+
+### Changes:
+
+**Agricultural Core v3.6.0:**
+- **Dashboard Authentication Fixed**:
+  - Dual-user password protection (Peter/Semillon, Tine/Vitovska)
+  - All /dashboards/* routes now protected
+  - Session management with 24-hour expiry
+  - Browser restart requires re-authentication
+  
+- **Farmer Registration Fixed**:
+  - Registration now saves to database with password hash
+  - Compatible with existing table structure
+  - Fallback for missing columns
+  
+- **Farmer Personalization Implemented**:
+  - New /farmer/dashboard with personalized view
+  - Shows only authenticated farmer's fields
+  - Weather for farmer's farm location
+  - Last 6 messages from chat history
+  - Protected API endpoints for data access
+
+- **Database Migration**:
+  - Migration script adds password_hash, is_active columns
+  - Backward compatible with existing farmers table
+  - Support for both wa_phone_number and whatsapp_number
+
+**Monitoring Dashboards v2.7.0:**
+- **Authentication System**:
+  - Login page at /api/v1/auth/login
+  - Dual-user support (Peter/Semillon, Tine/Vitovska)
+  - All dashboard routes protected
+  - Session-based authentication with cookies
+  - Automatic redirect for unauthorized access
+
+### Verification:
+- ✅ Dashboard authentication with both user accounts
+- ✅ Session persistence across requests
+- ✅ New browser session requires re-auth
+- ✅ Farmer registration saves to database
+- ✅ Farmer login with WhatsApp + password
+- ✅ Personalized dashboard shows correct data
+- ✅ API endpoints properly protected
+
+### Migration Required:
+```bash
+python migrations/add_auth_columns_to_farmers.py
+```
+
+---
+
 ## 2025-07-29 13:00:00 UTC | 14:00:00 CET - Zero-Regression Safety Monitoring System [🚀 DEPLOYMENT]
 
 **Deployed to Production**: READY ⏳ - Agricultural Core v3.5.29
