@@ -11,7 +11,7 @@ class VersionManager:
     
     # Version should be set as environment variable or in deployment
     # NEVER hardcode versions in individual services
-    CURRENT_VERSION = "3.6.0"  # DaisyUI Beautiful Agricultural UI
+    CURRENT_VERSION = "3.6.2"  # DaisyUI UI - Fixed routes
     
     @staticmethod
     def get_current_version() -> str:
